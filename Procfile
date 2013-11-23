@@ -1,1 +1,1 @@
-web: gunicorn issheintome.wsgi
+web: gunicorn isheintome.wsgi
