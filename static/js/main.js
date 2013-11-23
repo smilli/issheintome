@@ -27,7 +27,16 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
     // result from direct interaction from people using the app (such as a mouse click)
     // (2) it is a bad experience to be continually prompted to login upon page load.
     FB.login(
-      function(response){},
+      function(response) {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function(response) {
+            console.log('Good to see you, ' + response.name + '.');
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      },
       {scope: 'read_mailbox'}
     );
   } else {
@@ -37,12 +46,20 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
     // dialog right after they log in to Facebook. 
     // The same caveats as above apply to the FB.login() call here.
     FB.login(
-      function(response){},
+      function(response) {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function(response) {
+            console.log('Good to see you, ' + response.name + '.');
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      },
       {scope: 'read_mailbox'}
     );
   }
 });
-};
 
 // Load the SDK asynchronously
 (function(d){
