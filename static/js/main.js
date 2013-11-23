@@ -4,7 +4,8 @@ FB.init({
   appId      : '618524414871055',
   status     : true, // check login status
   cookie     : true, // enable cookies to allow the server to access the session
-  xfbml      : true  // parse XFBML
+  xfbml      : true,  // parse XFBML
+  oauth      : true
 });
 
 // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
@@ -27,7 +28,7 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
     // result from direct interaction from people using the app (such as a mouse click)
     // (2) it is a bad experience to be continually prompted to login upon page load.
     FB.login(
-      {perms: 'read_mailbox'}
+      {scope: 'read_mailbox'}
     );
   } else {
     // In this case, the person is not logged into Facebook, so we call the login() 
@@ -36,7 +37,7 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
     // dialog right after they log in to Facebook. 
     // The same caveats as above apply to the FB.login() call here.
     FB.login(
-      {perms: 'read_mailbox'}
+      {scope: 'read_mailbox'}
     );
   }
 });
