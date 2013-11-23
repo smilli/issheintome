@@ -1,19 +1,51 @@
 html , body{
-
+	background-color: #BFBFBF;
 
 
 }
 
+#header {
+	
+	position: relative;
+	top: 20%;
+	left: 40%;
+	
+}
 
 #content_box{
 	position: absolute;
-	height: 350px;
-	width: 350px;
-	background-color: #3b7b93;
+	height: 50%;
+	width: 50%;
+	top: 30%;
+	left: 25%;
+	background-color: #404040;
+	border: 5px solid;
+	border-color:  #FFFFFF;
+	padding: 20px 20px 20px 20px;
+	
 
 }
 
 #footer{
 
 	
+}
+
+h1{
+	font-family: 'Crete Round', serif;
+	color: #404040;
+	font-size: 60px;
+	font-weight: normal;
+	text-shadow: 
+		 -1px 1px #E5E5E5,
+		 -2px 2px #E5E5E5,
+		 -3px 3px #E5E5E5,
+		 -4px 4px #E5E5E5;
+}
+
+h2{
+	color: #FFFFFF;
+	font-family: 'Crete Round', serif;
+	font-size: 16px;
+	font-weight: normal;
 }
