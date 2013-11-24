@@ -68,6 +68,11 @@ html , body{
 	margin-right: auto;
 }
 
+#fb-auth { 
+	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
+	filter: drop-shadow(-10px 5px 0px #222); 
+}
+
 h1{
 	font-family: 'Lily Script One', cursive;
 	color: #8F4D27;
