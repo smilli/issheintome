@@ -46,9 +46,6 @@ $(document).ready(function(){
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
-          // hide choose-friend img to show checkmark bg
-          $findFriendImg.animate({opacity: 0});
-          $("#percentage").removeClass('black');
 
           // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
@@ -62,6 +59,13 @@ $(document).ready(function(){
               if(data.status=='failure'){
                 $message.html("You haven't talked to " + data.name + " in forever!  Try someone else.");
               } else{
+                // remove handler on find-friend
+                $findFriendImg.off();
+
+                // hide choose-friend img to show checkmark bg
+                $findFriendImg.animate({opacity: 0});
+                $("#percentage").removeClass('black');
+
                 // ajax to get sentiment value of text
                 $.ajax({
                   type: "POST", 
@@ -87,6 +91,7 @@ $(document).ready(function(){
                             if (response && response.post_id) {
                               $shareImg.animate({opacity: 0});
                               $("#share").removeClass('black');
+                              $shareImg.off();
                             }
                           });
                         });
@@ -139,7 +144,6 @@ $(document).ready(function(){
           oauth: true});
 
     function updateButton(response) {
-      var button = document.getElementById('auth-img');
           
       if (response.authResponse) {
         // hide auth img to show checkmark bg
@@ -153,13 +157,16 @@ $(document).ready(function(){
 
       } else {
         //user is not connected to your app or logged out
-        button.innerHTML = 'Login';
-        button.onclick = function() {
+       $authImg.click(function(e) {
+          e.preventDefault();
           FB.login(function(response) {
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
                 $authImg.animate({opacity: 0});
                 $("#find-friend").removeClass('black');
+
+                // remove handler for logging in
+                $authImg.off();
 
                 $findFriendImg.click(function (e) {
                     e.preventDefault();
@@ -169,7 +176,8 @@ $(document).ready(function(){
               //user cancelled login or did not grant authorization
             }
           }, {scope:'read_mailbox'});    
-        }
+        });
+
       }
     }
 
