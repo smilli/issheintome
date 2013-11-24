@@ -17,4 +17,5 @@ def sentiment(request):
 		response = urllib2.urlopen(req)
 		sentiment = response.read()
 		print(sentiment)
-		return render_to_response(the_page, context_instance=RequestContext(request))
+		posPct = round(sentiment.probability.pos * 100)
+		return render_to_response(posPct, context_instance=RequestContext(request))
