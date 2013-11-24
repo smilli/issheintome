@@ -16,6 +16,7 @@ html , body{
 	background-color: #80BCA3;
 	display:block;
 	height: 100%;
+	overflow: hidden;
 }
 
 #container{
@@ -59,7 +60,7 @@ html , body{
 }
 
 
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1440px){
 	#content_box{
 		width: 75%;
 		left: 9%;
@@ -73,7 +74,7 @@ html , body{
 	width: 100%;
 	font-size: 30px;
 	text-align: center;
-	bottom: -180px;
+	bottom: -100px;
 	color: #8F4D27;
 }
 
@@ -92,6 +93,7 @@ html , body{
 
 #percentage{
 	background: url('../img/percent-button.png') no-repeat;
+	position: relative;
 	font-family: 'Lily Script One', cursive;
 	font-size: 80px;
 	color: #fff;
@@ -120,12 +122,6 @@ html , body{
 	filter: drop-shadow(-10px 5px 0px #c6982b);
 }
 
-#percentage-img {
-	position: relative;
-	-webkit-filter: drop-shadow(-10px 5px 0px #BC674A); 
-	filter: drop-shadow(-10px 5px 0px #BC674A);
-}
-
 #share-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
 	filter: drop-shadow(-10px 5px 0px #778E75);
@@ -133,9 +129,9 @@ html , body{
 
 
 #percentage-num {
-	position: absolute;
-	top:85px;
-	left: 520px;
+	position: relative;
+	top:50px;
+	left: 20px;
 }
 
 

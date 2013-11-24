@@ -11,7 +11,11 @@ def index(request):
 def sentiment(request):
 	if request.method=='POST':
 		url = 'http://text-processing.com/api/sentiment/'
-		values = {'text' : request.POST['text']}
+		text = request.POST['text']
+		# sentiment analysis api limits to 10000 characters, 9900 to be safe
+		if len(text) >= 9900:
+			text = text[:9900]
+		values = {'text' : text}
 		data = urllib.urlencode(values)
 		req = urllib2.Request(url, data)
 		response = urllib2.urlopen(req)
