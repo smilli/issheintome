@@ -59,12 +59,22 @@ html , body{
 	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
 	filter: drop-shadow(-10px 5px 0px #222); 
 }
+
 #choose-friend {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
 }
 
 #percentage {
+	position: relative;
+	-webkit-filter: drop-shadow(-10px 5px 0px #BC674A); 
+	filter: drop-shadow(-10px 5px 0px #BC674A);
+}
+
+#sentiment {
+	position: absolute;
+	top:80px;
+	left: 525px;
 	font-family: 'Lily Script One', cursive;
 	font-size: 80px;
 	color: #fff;
