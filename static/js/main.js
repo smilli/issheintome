@@ -39,6 +39,10 @@ $(document).ready(function(){
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
+          // add checkmark image
+          $("#choose-friend2").show();
+          $('#choose-friend').hide();
+
           // facebook user ID of friend (romantic interest) selected
           var romIntID = selectedFriendIds[0]
 
@@ -100,7 +104,9 @@ $(document).ready(function(){
       var button = document.getElementById('fb-auth');
           
       if (response.authResponse) {
-        // automatically add checkmark over button here
+        // add checkmark image
+        $("#fb-auth2").show();
+        $("#fb-auth").hide();
 
         $("#choose-friend").click(function (e) {
             e.preventDefault();
@@ -113,9 +119,9 @@ $(document).ready(function(){
         button.onclick = function() {
           FB.login(function(response) {
             if (response.authResponse) {
-
-                // text of conversation
-                var conversationData;
+                // add checkmark image
+                $("#fb-auth2").show();
+                $("#fb-auth").hide();
 
                 $("#choose-friend").click(function (e) {
                     e.preventDefault();
