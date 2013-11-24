@@ -112,6 +112,10 @@ html , body{
 	margin-right: auto;
 }
 
+.black {
+	background: url('../img/black.png') no-repeat;
+	opacity: 0.6;
+}
 
 h1{
 	font-family: 'Lily Script One', cursive;
