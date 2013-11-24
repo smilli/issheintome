@@ -35,12 +35,18 @@ $(document).ready(function(){
   // Initialize friend selector
   TDFriendSelector.init({debug: true});
 
+  // images
+  $authImg = $("#auth-img");
+  $findFriendImg = $("#find-friend-img");
+  $shareImg = $('#share-img')
+
   // friend selector code (and basically everything else in the callbacks)
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
           // hide choose-friend img to show checkmark bg
-          $("#find-friend-img").animate({opacity: 0});
+          $findFriendImg.animate({opacity: 0});
+          $("#percentage").removeClass('black');
 
           // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
@@ -69,16 +75,17 @@ $(document).ready(function(){
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
                         clearInterval(updatePercentage);
-                        // brighten share button
+                        $('#share').removeClass('black');
 
-                        $('#share-img').click(function(e){ 
+                        $shareImg.click(function(e){ 
                           FB.ui({
                             method: 'feed',
                             link: 'http://issheintome.herokuapp.com/',
                             caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
                           }, function(response){
                             if (response && response.post_id) {
-                              $("#share-img").animate({opacity: 0});
+                              $shareImg.animate({opacity: 0});
+                              $("#share").removeClass('black');
                             }
                           });
                         })
@@ -134,9 +141,10 @@ $(document).ready(function(){
           
       if (response.authResponse) {
         // hide auth img to show checkmark bg
-        $("#auth-img").animate({opacity: 0});
+        $authImg.animate({opacity: 0});
+        $("#find-friend").removeClass('black');
 
-        $("#find-friend-img").click(function (e) {
+        $findFriendImg.click(function (e) {
             e.preventDefault();
             romanceSelector.showFriendSelector();
         });
@@ -148,9 +156,10 @@ $(document).ready(function(){
           FB.login(function(response) {
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
-                $("#auth-img").animate({opacity: 0});
+                $authImg.animate({opacity: 0});
+                $("#find-friend").removeClass('black');
 
-                $("#find-friend-img").click(function (e) {
+                $findFriendImg.click(function (e) {
                     e.preventDefault();
                     romanceSelector.showFriendSelector();
                 });
