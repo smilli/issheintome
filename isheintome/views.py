@@ -10,11 +10,11 @@ def sentiment(request):
 	if request.method=='POST':
 		url = 'http://text-processing.com/api/sentiment/'
 		print(request.POST)
-		values = {'text' : request.POST['data']}
+		values = {'text' : request.POST['text']}
 
 		data = urllib.urlencode(values)
 		req = urllib2.Request(url, data)
 		response = urllib2.urlopen(req)
-		the_page = response.read()
-		print(the_page)
+		sentiment = response.read()
+		print(sentiment)
 		return render_to_response(the_page, context_instance=RequestContext(request))
