@@ -27,6 +27,7 @@ window.fbAsyncInit = function() {
       button.onclick = function() {
         FB.login(function(response) {
           if (response.authResponse) {
+              $("#authentication").fadeOut(3000);
               accessToken = response.authResponse.accessToken;
               var userID;
               FB.api('/me', function(response) {
@@ -36,7 +37,7 @@ window.fbAsyncInit = function() {
                 for (var i = 0; i < response.length; i++){
                   // if there are only two people in this conversation
                   if (response[i].to.data.length == 2){
-                    if (response[i].to.data[0]==romIntID or response[i].to.data[1]==romIntID){
+                    if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
                       // change this to only return data from 
                       return response[i].comments.data
                     }
