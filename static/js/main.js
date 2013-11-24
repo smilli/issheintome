@@ -42,12 +42,9 @@ $(document).ready(function(){
           // hide choose-friend img to show checkmark bg
           $("#choose-friend").animate({opacity: 0});
 
-
-          // facebook user ID of friend (romantic interest) selected
-          var romIntID = selectedFriendIds[0];
+          // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
-            romInt = {'id': selectedFriendIds[0], 'name': response.name};
-            console.log(romInt);
+            romInterest = {'id': selectedFriendIds[0], 'name': response.name};
           });
 
           // get conversation data of selectedfriend
@@ -95,25 +92,25 @@ $(document).ready(function(){
                 // if there are only two people in this conversation
                 if (convos[i].to.data.length == 2){
                   // if the romantic interest is in the conversation
-                  if (convos[i].to.data[0].id==romIntID || convos[i].to.data[1].id==romIntID){
+                  if (convos[i].to.data[0].id==romInterest.id || convos[i].to.data[1].id==romInterest.id){
                     // change this to only return data from 
                     var messages = convos[i].comments.data;
 
                     // concatenate all messages from romantic interest into big blob of text
                     var text = '';
                     for (var i = 0; i < messages.length; i++){
-                      if (messages[i].from.id==romIntID){
+                      if (messages[i].from.id==romInterest.id){
                         text += ' ' + messages[i].message;
                       }
                     }
 
                     // call callback with text as parameter
-                    cb({text: text, status: 'success'});
+                    cb({text: text, status: 'success', name: romInterest.name});
                     return;
                   }
                 }
               }
-              cb({status:'failure'});
+              cb({status:'failure', name: romInterest.name});
             }
           });
       }
