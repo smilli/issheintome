@@ -91,15 +91,16 @@ window.fbAsyncInit = function() {
                             }
                           }
                         }
-                      });
 
-                      $.ajax({
-                        type: "POST",
-                        url: "/sentiment/",
-                        data: conversationText,
-                        success: function(data) {
-                          console.log(data)
-                        }
+                        // ajax to get sentiment value of text
+                        $.ajax({
+                          type: "POST",
+                          url: "/sentiment/",
+                          data: conversationText,
+                          success: function(data) {
+                            console.log(data)
+                          }
+                        });
                       });
                   }
               });
