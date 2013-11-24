@@ -103,12 +103,11 @@ window.fbAsyncInit = function() {
 
                                 // call callback with text as parameter
                                 cb({text: text, status: 'success'});
+                                return;
                               }
                             }
                           }
-                          else{
-                            cb({status:'failure'})
-                          }
+                          cb({status:'failure'});
                         }
                       });
                   }
