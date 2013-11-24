@@ -12,6 +12,7 @@ Red: #8F4D27;
 
 
 html , body{
+	position:relative;
 	background-color: #80BCA3;
 	display:block;
 
