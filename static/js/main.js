@@ -16,7 +16,6 @@ $(document).ready(function(){
       return cookieValue;
   }
   var csrftoken = getCookie('csrftoken');
-  console.log(csrftoken);
 
   // set csrf token as a header in ajax request
   function csrfSafeMethod(method) {
@@ -66,12 +65,9 @@ $(document).ready(function(){
                     callbackSubmit: function(selectedFriendIds) {
                         // facebook user ID of friend (romantic interest) selected
                         var romIntID = selectedFriendIds[0]
-                        console.log(selectedFriendIds);
-                        console.log("The following friends were selected: " + selectedFriendIds.join(", "));
 
                         // get conversation data of selectedfriend
                         FB.api('/me/inbox', {limit:800}, function(response){
-                          console.log(response);
                           getConversationText(response.data, function(text){
                             if(status=='failure'){
                               // some response displayed to user like 'no messages available for selected friend'
