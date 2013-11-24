@@ -15,8 +15,13 @@ html , body{
 	position:relative;
 	background-color: #80BCA3;
 	display:block;
+	height: 100%;
+	overflow: hidden;
+}
 
-
+#container{
+	padding-top: 10%;
+	height: auto;
 }
 
 #header {
@@ -39,9 +44,8 @@ html , body{
 	margin: 0px;
 	position: relative;
 	height: auto;
-	width: 60%;
-	top: 30%;
-	left: 20%;
+	width: 75%;
+	left: 9%;
 	background-color: #8F4D27;
 	border: 5px solid;
 	border-color:  #FFFFFF;
@@ -83,6 +87,12 @@ html , body{
 
 #share{
 	background: url('../img/shared.png') no-repeat;
+}
+
+.button{
+		max-width: 100%;
+	    height: auto;
+	    width: auto\9; /* ie8 */
 }
 
 #auth-img { 

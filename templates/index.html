@@ -12,23 +12,23 @@
 	</head>
 	<body> 
 		
+		<div id="container">
+			<div id="content_box">
+				<div id = "header">
+					<h1>is she into me?<h1>
+				</div>
 
-		<div id = "content_box">
-			<div id = "header">
-				<h1>is she into me?<h1>
-			</div>
+				<div id="auth"><img id="auth-img" class="button" src = "{{ STATIC_URL }}img/fbbutton.png" height = "200" width = "200" /></div>
 
-			<div id="auth"><img id="auth-img" src = "{{ STATIC_URL }}img/fbbutton.png" height = "200" width = "200" /></div>
+				<div id="find-friend" class="black"><img id = "find-friend-img" class="button" src = "{{ STATIC_URL }}img/choose-friend.png" height = "200" width = "200" /></div>
 
-			<div id="find-friend" class="black"><img id = "find-friend-img" src = "{{ STATIC_URL }}img/choose-friend.png" height = "200" width = "200" /></div>
+				<div id="percentage" class="black">
+				<span id="percentage-num"><span id="sentiment">0</span>%</span></div>
 
-			<div id="percentage" class="black">
-			<span id="percentage-num"><span id="sentiment">0</span>%</span></div>
+				<div id="share" class="black"><img id="share-img" class="button" src = "{{ STATIC_URL }}img/share.png" height = "200" width = "200" /></div>
+				<div class="spacer" style="clear: both;"></div>
 
-			<div id="share" class="black"><img id="share-img" src = "{{ STATIC_URL }}img/share.png" height = "200" width = "200" /></div>
-			<div class="spacer" style="clear: both;"></div>
-
-			<div id="message"></div>
+				<div id="message"></div>
 			</div>
 
 			<div id = "footer">
@@ -37,6 +37,7 @@
 				and 
 				<a href="http://www.linkedin.com/pub/jessica-chang/57/342/280/"> Jessica Chang </a>.
 			</div>
+		</div>
 
 
 
