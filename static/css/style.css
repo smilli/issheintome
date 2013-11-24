@@ -44,12 +44,35 @@ html , body{
 	display:block;
 }
 
+#fb-auth { 
+	display: inline;
+	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
+	filter: drop-shadow(-10px 5px 0px #222); 
+	margin: 15px 15px 15px 15px;
+}
 
-#choose-friend{
+#fb-auth2 { 
+	display: inline;
+	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
+	filter: drop-shadow(-10px 5px 0px #222); 
+	margin: 15px 15px 15px 15px;
+	z-index: -1;
+}
+
+#choose-friend {
 	display:inline;
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
-	margin-left: 15px;
+	margin: 15px 15px 15px 15px;
+
+}
+
+#choose-friend2 {
+	display:inline;
+	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
+	filter: drop-shadow(-10px 5px 0px #c6982b);
+	margin: 15px 15px 15px 15px;
+	z-index: -1;
 
 }
 
@@ -71,10 +94,6 @@ html , body{
 	margin-right: auto;
 }
 
-#fb-auth { 
-	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
-	filter: drop-shadow(-10px 5px 0px #222); 
-}
 
 h1{
 	font-family: 'Lily Script One', cursive;
