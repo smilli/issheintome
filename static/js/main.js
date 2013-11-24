@@ -28,6 +28,7 @@ window.fbAsyncInit = function() {
       button.onclick = function() {
         FB.login(function(response) {
       if (response.authResponse) {
+        console.log(response);
             FB.api('/me', function(response) {
           var userInfo = document.getElementById('user-info');
           userInfo.innerHTML = 
