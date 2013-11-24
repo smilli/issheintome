@@ -51,21 +51,21 @@ html , body{
 	height: auto;
 	width: 75%;
 	left: 9%;
-	background-color: #8F4D27;
+	/*background-color: #8F4D27;
 	border: 5px solid;
-	border-color:  #FFFFFF;
+	border-color:  #FFFFFF;*/
 	padding: 20px;
 	display:block;
 }
 
 #message{
+	margin: 10px;
 	font-family: 'Crete Round', serif;
-	position: absolute;
 	width: 100%;
-	font-size: 30px;
+	font-size: 24px;
+	font-weight: lighter;
 	text-align: center;
-	bottom: -100px;
-	color: #8F4D27;
+	color: #fff;
 }
 
 #auth, #find-friend, #percentage, #share{
