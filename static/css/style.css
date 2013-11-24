@@ -41,6 +41,14 @@ html , body{
 	display:block;
 }
 
+#message{
+	position: absolute;
+	width: 100%;
+	font-size: 50px;
+	text-align: center;
+	bottom: -75px;
+}
+
 #auth, #find-friend, #percentage, #share{
 	float: left;
 	margin: 15px;

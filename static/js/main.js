@@ -38,7 +38,9 @@ $(document).ready(function(){
   // images
   $authImg = $("#auth-img");
   $findFriendImg = $("#find-friend-img");
-  $shareImg = $('#share-img')
+  $shareImg = $('#share-img');
+
+  $message = $('#message');
 
   // friend selector code (and basically everything else in the callbacks)
   romanceSelector = TDFriendSelector.newInstance({
@@ -58,7 +60,7 @@ $(document).ready(function(){
             console.log(response);
             getConversationText(response.data, function(data){
               if(status=='failure'){
-                // some response displayed to user like 'no messages available for selected friend'
+                $message.innerHTML = "You haven't even talked to " + data.name + " in forever!";
               } else{
                 // ajax to get sentiment value of text
                 $.ajax({
