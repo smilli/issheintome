@@ -58,6 +58,15 @@ html , body{
 	display:block;
 }
 
+
+@media screen and (max-width: 1280px){
+	#content_box{
+		width: 75%;
+		left: 9%;
+	}
+}
+
+
 #message{
 	font-family: 'Crete Round', serif;
 	position: absolute;
