@@ -60,6 +60,7 @@ $(document).ready(function(){
                   data: data,
                   success: function(data) {
                     // animate sentiment percentage update
+                    print(data)
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
                     var endVal = data.sentiment;
