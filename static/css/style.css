@@ -1,5 +1,18 @@
+/*Color Scheme:
+Dark Blue: #42565D;
+Olive: #B8B37C;
+Tan: #DCC784;
+Green: #579070;
+Peach: #D99F72;
+
+Headache
+Blue: #80BCA3;
+Red: #8F4D27;
+*/
+
+
 html , body{
-	background-color: #BFBFBF;
+	background-color: #80BCA3;
 
 
 }
@@ -18,10 +31,11 @@ html , body{
 	width: 50%;
 	top: 30%;
 	left: 25%;
-	background-color: #404040;
+	background-color: #8F4D27;
 	border: 5px solid;
 	border-color:  #FFFFFF;
 	padding: 20px 20px 20px 20px;
+
 	
 
 }
@@ -31,9 +45,23 @@ html , body{
 	
 }
 
-h1{
+.textarea {
+	background: #8F4D27;
+	border: 1px solid #999;
+	outline: 0;
 	font-family: 'Crete Round', serif;
-	color: #404040;
+
+}
+
+.centered {
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1{
+	font-family: 'Lily Script One', cursive;
+	color: #8F4D27;
 	font-size: 60px;
 	font-weight: normal;
 	text-shadow: 
@@ -44,6 +72,7 @@ h1{
 }
 
 h2{
+	text-align: center;
 	color: #FFFFFF;
 	font-family: 'Crete Round', serif;
 	font-size: 16px;

@@ -9,15 +9,27 @@
 	</head>
 	<body> 
 		<div id = "header">
-			<h1>Is She Into Me?<h1>
+			<h1>is she into me?<h1>
 		</div>
 
 		<div id = "content_box">
-			<h2>hello worldddddddddddd</h2>
-			<div id="fb-root"></div>
-			<h2>Updated JS SDK example</h2><br />
-			<div id="user-info"></div>
-			<p><button id="fb-auth">Login</button></p>
+			<h2>Login to Facebook and agree to permissions!
+			<br>
+				<div id="fb-root"></div>
+				<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+
+
+
+			</h2>
+				<!-- Facebook Stuff -->
+			<img class = "centered" src = "{{ STATIC_URL }}img/fbbutton.png" height = "200" width = "200">
+
+			<!-- <h2>
+				Choose a friend:
+				<input class = "textarea" type="text">
+
+				</input>
+			</h2> -->
 		</div>
 
 		<div id = "footer">
