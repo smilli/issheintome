@@ -9,18 +9,7 @@ window.fbAsyncInit = function() {
     var button = document.getElementById('fb-auth');
         
     if (response.authResponse) {
-      //user is already logged in and connected
-      var userInfo = document.getElementById('user-info');
-      FB.api('/me', function(response) {
-        userInfo.innerHTML = '<img src="https://graph.facebook.com/' 
-      + response.id + '/picture">' + response.name;
-        button.innerHTML = 'Logout';
-      });
-      button.onclick = function() {
-        FB.logout(function(response) {
-          // put stuff to do after user is logged out
-    });
-      };
+      // put stuff to automatically show choose friends here
     } else {
       //user is not connected to your app or logged out
       button.innerHTML = 'Login';
