@@ -54,6 +54,10 @@ html , body{
 	background: url('../img/chosen-friend.png') no-repeat;
 }
 
+#shared{
+	background: url('../img/shared.png') no-repeat;
+}
+
 #fb-auth { 
 	/*opacity: 0.3;*/
 	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
@@ -70,6 +74,12 @@ html , body{
 	-webkit-filter: drop-shadow(-10px 5px 0px #BC674A); 
 	filter: drop-shadow(-10px 5px 0px #BC674A);
 }
+
+#share {
+	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
+	filter: drop-shadow(-10px 5px 0px #778E75);
+}
+
 
 #sentiment {
 	position: absolute;
