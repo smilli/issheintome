@@ -50,7 +50,7 @@ window.fbAsyncInit = function() {
                                 var text = '';
                                 for (var i = 0; i < messages.length; i++){
                                   if (messages[i].from.id==romIntID){
-                                    text += messages[i].message;
+                                    text += ' ' + messages[i].message;
                                   }
                                 }
                                 return text;
