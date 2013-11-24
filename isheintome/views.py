@@ -20,5 +20,5 @@ def sentiment(request):
 		print(sentiment)
 		sentiment = json.loads(sentiment)
 		print(sentiment)
-		posPct = round(sentiment.probability.pos * 100)
+		posPct = round(sentiment['probability']['pos'] * 100)
 		return render_to_response(posPct, context_instance=RequestContext(request))
