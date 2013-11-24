@@ -40,7 +40,8 @@ $(document).ready(function(){
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
           // hide choose-friend img to show checkmark bg
-          $('#choose-friend').hide();
+          $("#choose-friend").animate({opacity: 0});
+
 
           // facebook user ID of friend (romantic interest) selected
           var romIntID = selectedFriendIds[0]
@@ -104,7 +105,7 @@ $(document).ready(function(){
           
       if (response.authResponse) {
         // hide fb-auth img to show checkmark bg
-        $("#fb-auth").hide();
+        $("#fb-auth").animate({opacity: 0});
 
         $("#choose-friend").click(function (e) {
             e.preventDefault();
@@ -118,7 +119,7 @@ $(document).ready(function(){
           FB.login(function(response) {
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
-                $("#fb-auth").hide();
+                $("#fb-auth").animate({opacity: 0});
 
                 $("#choose-friend").click(function (e) {
                     e.preventDefault();
