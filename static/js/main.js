@@ -35,16 +35,16 @@ window.fbAsyncInit = function() {
                       // get conversation data of selectedfriend
                       FB.api('/me/inbox', {limit:800}, function(response){
                         console.log(response);
-                        conversationData = getConversationData(response)
-                        function getConversationData(response){
-                          for (var i = 0; i < response.length; i++){
+                        conversationData = getConversationData(response.data)
+                        function getConversationData(convos){
+                          for (var i = 0; i < convos.length; i++){
                             console.log(romIntID);
-                            console.log(response[i].to.data);
+                            console.log(convos[i].to.data);
                             // if there are only two people in this conversation
-                            if (response[i].to.data.length == 2){
-                              if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
+                            if (convos[i].to.data.length == 2){
+                              if (convos[i].to.data[0]==romIntID || convos[i].to.data[1]==romIntID){
                                 // change this to only return data from 
-                                return response[i].comments.data
+                                return convos[i].comments.data
                               }
                             }
                           }
