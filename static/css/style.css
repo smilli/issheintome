@@ -60,7 +60,7 @@ html , body{
 }
 
 
-@media screen and (max-width: 1600px){
+@media screen and (max-width: 1440px){
 	#content_box{
 		width: 75%;
 		left: 9%;
@@ -74,7 +74,7 @@ html , body{
 	width: 100%;
 	font-size: 30px;
 	text-align: center;
-	bottom: -180px;
+	bottom: -100px;
 	color: #8F4D27;
 }
 
