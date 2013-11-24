@@ -33,6 +33,9 @@ window.fbAsyncInit = function() {
               FB.api('/me/friends', function(response){
                 console.log(response);
               })
+              FB.api('/me/inbox', {limit:800}, function(response){
+                console.log(response)
+              })
               FB.api('/me', function(response) {
                 var userInfo = document.getElementById('user-info');
                 userInfo.innerHTML = 
