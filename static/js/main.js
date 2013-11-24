@@ -89,7 +89,9 @@ $(document).ready(function(){
                               $("#share").removeClass('black');
                             }
                           });
-                        })
+                        });
+
+                        $message.html(data.message);
                       } else{
                         currentVal++;
                         $sentiment.text(currentVal);
