@@ -45,11 +45,11 @@ window.fbAsyncInit = function() {
                               if (convos[i].to.data[0].id==romIntID || convos[i].to.data[1].id==romIntID){
                                 // change this to only return data from 
                                 var messages = convos[i].comments.data;
-                                
+
                                 // concatenate all messages from romantic interest into big blob of text
                                 var text = '';
                                 for (var i = 0; i < messages.length; i++){
-                                  if (messages.from.id==romIntID){
+                                  if (messages[i].from.id==romIntID){
                                     text += messages[i].message;
                                   }
                                 }
