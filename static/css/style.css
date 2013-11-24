@@ -63,7 +63,7 @@ html , body{
 }
 
 #fb-auth2 { 
-	display: inline;
+	display: none;
 	/*opacity: 0.3;*/
 	position:absolute;
 	top:0px;
@@ -82,7 +82,7 @@ html , body{
 
 #choose-friend2 {
 	
-	display:inline;
+	display: none;
 	position: absolute;
 	top:0px;
 	left:0px;
