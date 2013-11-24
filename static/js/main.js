@@ -33,7 +33,7 @@ $(document).ready(function(){
   });
 
   // Initialize friend selector
-  TDFriendSelector.init({debug: true});
+  TDFriendSelector.init({debug: false});
 
   // images
   $authImg = $("#auth-img");
@@ -55,7 +55,6 @@ $(document).ready(function(){
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:20}, function(response){
             getConversationText(response.data, function(data){
-              console.log(data);
               if(data.status=='failure'){
                 $message.html("You haven't talked to " + data.name + " in forever!  Try someone else.");
               } else{
