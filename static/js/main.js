@@ -80,10 +80,7 @@ $(document).ready(function(){
                               $.ajax({
                                 type: "POST",
                                 url: "/sentiment/",
-                                data: {
-                                  'text': text,
-                                  'csrfmiddlewaretoken': $('csrfmiddlewaretoken').val()
-                                },
+                                data: text,
                                 success: function(data) {
                                   console.log(data)
                                 }
