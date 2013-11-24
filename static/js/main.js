@@ -54,6 +54,7 @@ $(document).ready(function(){
 
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:20}, function(response){
+            console.log(response)
             if (!response || response.error){
               console.log(repsonse.error);
             } else{
