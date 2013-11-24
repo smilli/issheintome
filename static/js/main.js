@@ -19,42 +19,41 @@ window.fbAsyncInit = function() {
               // fade out the authentication
               $("#authentication").fadeOut(3000);
 
-              // ID of romantic interest
-              var romIntID;
+              // text of conversation
+              var conversationData;
 
               // friend selector code
               TDFriendSelector.init({debug: true});
               romanceSelector = TDFriendSelector.newInstance({
                   maxSelection: 1,
                   callbackSubmit: function(selectedFriendIds) {
-                      romIntID = selectedFriendIds[0]
+                      // facebook user ID of friend (romantic interest) selected
+                      var romIntID = selectedFriendIds[0]
                       console.log(selectedFriendIds);
                       console.log("The following friends were selected: " + selectedFriendIds.join(", "));
+
+                      // get conversation data of selectedfriend
+                      FB.api('/me/inbox', {limit:800}, function(response){
+                        console.log(response);
+                        conversationData = getConversationData(response)
+                        function getConversationData(response){
+                          for (var i = 0; i < response.length; i++){
+                            // if there are only two people in this conversation
+                            if (response[i].to.data.length == 2){
+                              if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
+                                // change this to only return data from 
+                                return response[i].comments.data
+                              }
+                            }
+                          }
+                        }
+                      });
                   }
               });
 
               $("#choose-friend").click(function (e) {
                   e.preventDefault();
                   romanceSelector.showFriendSelector();
-              });
-
-              // look up conversations with romantic interest
-              accessToken = response.authResponse.accessToken;
-              var conversationData;
-              FB.api('/me/inbox', {limit:800}, function(response){
-                console.log(response);
-                conversationData = getConversationData(response)
-                function getConversationData(response){
-                  for (var i = 0; i < response.length; i++){
-                    // if there are only two people in this conversation
-                    if (response[i].to.data.length == 2){
-                      if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
-                        // change this to only return data from 
-                        return response[i].comments.data
-                      }
-                    }
-                  }
-                }
               });
           } else {
             //user cancelled login or did not grant authorization
