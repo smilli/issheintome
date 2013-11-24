@@ -1,3 +1,36 @@
+// django csrf token setup for ajax requests
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+// set csrf token as a header in ajax request
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+$.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 window.fbAsyncInit = function() {
   FB.init({ appId: '618524414871055', 
         status: true, 
@@ -57,6 +90,15 @@ window.fbAsyncInit = function() {
                               }
                             }
                           }
+                        }
+                      });
+
+                      $.ajax({
+                        type: "POST",
+                        url: "/sentiment/",
+                        data: text,
+                        success: function(data) {
+                          console.log(data)
                         }
                       });
                   }
