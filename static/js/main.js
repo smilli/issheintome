@@ -57,8 +57,8 @@ $(document).ready(function(){
 
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:20}, function(response){
-            console.log(response);
             getConversationText(response.data, function(data){
+              console.log(data);
               if(status=='failure'){
                 $message.innerHTML = "You haven't even talked to " + data.name + " in forever!";
               } else{
@@ -69,7 +69,6 @@ $(document).ready(function(){
                   data: data,
                   success: function(data) {
                     // animate sentiment percentage update
-                    console.log(data)
                     data = $.parseJSON(data);
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
@@ -102,7 +101,6 @@ $(document).ready(function(){
             });
 
             function getConversationText(convos, cb){
-              console.log(convos)
               for (var i = 0; i < convos.length; i++){
                 // if there are only two people in this conversation
                 if (convos[i].to.data.length == 2){
