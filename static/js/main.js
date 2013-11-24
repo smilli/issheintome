@@ -89,6 +89,7 @@ $(document).ready(function(){
             });
 
             function getConversationText(convos, cb){
+              console.log(convos)
               for (var i = 0; i < convos.length; i++){
                 // if there are only two people in this conversation
                 if (convos[i].to.data.length == 2){
