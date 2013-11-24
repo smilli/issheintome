@@ -19,7 +19,9 @@ window.fbAsyncInit = function() {
               $("#authentication").fadeOut(3000);
               TDFriendSelector.init({debug: true});
               romanceSelector = TDFriendSelector.newInstance({
+                  maxSelection: 1,
                   callbackSubmit: function(selectedFriendIds) {
+                      console.log(selectedFriendIds);
                       console.log("The following friends were selected: " + selectedFriendIds.join(", "));
                   }
               });
