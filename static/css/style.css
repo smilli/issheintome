@@ -34,7 +34,7 @@ html , body{
 	width: 50%;
 	top: 30%;
 	left: 25%;
-	background-color: #8F4D27;
+	background-color: #8F4D28;
 	border: 5px solid;
 	border-color:  #FFFFFF;
 	padding: 20px;
@@ -61,6 +61,12 @@ html , body{
 #choose-friend {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
+}
+
+#percentage {
+	font-family: 'Lily Script One', cursive;
+	font-size: 80px;
+	color: #fff;
 }
 
 
