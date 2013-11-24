@@ -49,6 +49,7 @@ $(document).ready(function(){
 
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:800}, function(response){
+            console.log(response);
             getConversationText(response.data, function(data){
               if(status=='failure'){
                 // some response displayed to user like 'no messages available for selected friend'
@@ -63,7 +64,7 @@ $(document).ready(function(){
                     console.log(data)
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
-                    var endVal = data.sentiment;
+                    var endVal = data['sentiment'];
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
                         clearInterval(updatePercentage);
@@ -89,6 +90,7 @@ $(document).ready(function(){
             });
 
             function getConversationText(convos, cb){
+              console.log(convos)
               for (var i = 0; i < convos.length; i++){
                 // if there are only two people in this conversation
                 if (convos[i].to.data.length == 2){
