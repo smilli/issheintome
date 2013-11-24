@@ -72,7 +72,7 @@ function filterConversations(response){
 
   function handleConversationSentiment(data){
     if(data.status=='failure'){
-      $message.html(data.name + "hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
+      $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
     } else{
       // remove handler on find-friend
       $findFriendImg.off();
