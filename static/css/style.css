@@ -93,6 +93,7 @@ html , body{
 
 #percentage{
 	background: url('../img/percent-button.png') no-repeat;
+	position: relative;
 	font-family: 'Lily Script One', cursive;
 	font-size: 80px;
 	color: #fff;
@@ -121,12 +122,6 @@ html , body{
 	filter: drop-shadow(-10px 5px 0px #c6982b);
 }
 
-#percentage-img {
-	position: relative;
-	-webkit-filter: drop-shadow(-10px 5px 0px #BC674A); 
-	filter: drop-shadow(-10px 5px 0px #BC674A);
-}
-
 #share-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
 	filter: drop-shadow(-10px 5px 0px #778E75);
@@ -134,9 +129,9 @@ html , body{
 
 
 #percentage-num {
-	position: absolute;
-	top:85px;
-	left: 520px;
+	position: relative;
+	top:50px;
+	left: 30px;
 }
 
 
