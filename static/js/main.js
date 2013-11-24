@@ -60,7 +60,7 @@ $(document).ready(function(){
             getConversationText(response.data, function(data){
               console.log(data);
               if(data.status=='failure'){
-                $message.html("You haven't even talked to " + data.name + " in forever!");
+                $message.html("You haven't talked to " + data.name + " in forever!  Try someone else.");
               } else{
                 // ajax to get sentiment value of text
                 $.ajax({
