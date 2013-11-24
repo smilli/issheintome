@@ -61,12 +61,10 @@ $(document).ready(function(){
                   data: data,
                   success: function(data) {
                     // animate sentiment percentage update
-                    console.log(data)
+                    data = $.parseJSON(data);
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
-                    console.log(data['sentiment']);
-                    console.log(data.sentiment);
-                    var endVal = data['sentiment'];
+                    var endVal = data.sentiment;
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
                         clearInterval(updatePercentage);
