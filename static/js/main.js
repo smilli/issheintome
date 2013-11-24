@@ -60,7 +60,7 @@ $(document).ready(function(){
                 $message.html("You haven't talked to " + data.name + " in forever!  Try someone else.");
               } else{
                 // remove handler on find-friend
-                $findFriendImg.off('click');
+                $findFriendImg.off();
 
                 // hide choose-friend img to show checkmark bg
                 $findFriendImg.animate({opacity: 0});
@@ -91,7 +91,7 @@ $(document).ready(function(){
                             if (response && response.post_id) {
                               $shareImg.animate({opacity: 0});
                               $("#share").removeClass('black');
-                              $shareImg.off('click');
+                              $shareImg.off();
                             }
                           });
                         });
@@ -166,7 +166,7 @@ $(document).ready(function(){
                 $("#find-friend").removeClass('black');
 
                 // remove handler for logging in
-                $authImg.off('click');
+                $authImg.off();
 
                 $findFriendImg.click(function (e) {
                     e.preventDefault();
