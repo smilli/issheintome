@@ -1,3 +1,5 @@
+{% csrf_token %}
+
 $(document).ready(function(){
   // using jQuery
   function getCookie(name) {
@@ -80,7 +82,10 @@ $(document).ready(function(){
                               $.ajax({
                                 type: "POST",
                                 url: "/sentiment/",
-                                data: text,
+                                data: {
+                                  'text': text,
+                                  'csrfmiddlewaretoken': $('csrfmiddlewaretoken').val()
+                                },
                                 success: function(data) {
                                   console.log(data)
                                 }
