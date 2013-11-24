@@ -48,7 +48,7 @@ $(document).ready(function(){
           });
 
           // get conversation data of selectedfriend
-          FB.api('/me/inbox', {limit:800}, function(response){
+          FB.api('/me/inbox', {limit:20}, function(response){
             console.log(response);
             getConversationText(response.data, function(data){
               if(status=='failure'){
@@ -62,9 +62,10 @@ $(document).ready(function(){
                   success: function(data) {
                     // animate sentiment percentage update
                     console.log(data)
+                    data = $.parseJSON(data);
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
-                    var endVal = data['sentiment'];
+                    var endVal = data.sentiment;
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
                         clearInterval(updatePercentage);
