@@ -42,11 +42,12 @@ html , body{
 }
 
 #message{
+	font-family: 'Crete Round';
 	position: absolute;
 	width: 100%;
 	font-size: 50px;
 	text-align: center;
-	bottom: -75px;
+	bottom: -50px;
 }
 
 #auth, #find-friend, #percentage, #share{
