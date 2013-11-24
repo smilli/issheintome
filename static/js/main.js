@@ -56,6 +56,7 @@ $(document).ready(function(){
           FB.api('/me/inbox', {limit:20}, function(response){
             if (!response || response.error){
               console.log(response.error);
+              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
             } else{
               filterConversations(response);
             }
