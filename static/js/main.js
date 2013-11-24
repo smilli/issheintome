@@ -68,9 +68,23 @@ window.fbAsyncInit = function() {
                       // get conversation data of selectedfriend
                       FB.api('/me/inbox', {limit:800}, function(response){
                         console.log(response);
-                        conversationText = getConversationText(response.data)
-                        console.log(conversationText)
-                        function getConversationText(convos){
+                        getConversationText(response.data, function(text){
+                          if(status=='failure'){
+                            // some response displayed to user like 'no messages available for selected friend'
+                          } else{
+                            // ajax to get sentiment value of text
+                            $.ajax({
+                              type: "POST",
+                              url: "/sentiment/",
+                              data: text,
+                              success: function(data) {
+                                console.log(data)
+                              }
+                            });
+                          }
+                        });
+
+                        function getConversationText(convos, cb){
                           for (var i = 0; i < convos.length; i++){
                             // if there are only two people in this conversation
                             if (convos[i].to.data.length == 2){
@@ -86,21 +100,16 @@ window.fbAsyncInit = function() {
                                     text += ' ' + messages[i].message;
                                   }
                                 }
-                                return text;
+
+                                // call callback with text as parameter
+                                cb({text: text, status: 'success'});
                               }
                             }
                           }
-                        }
-
-                        // ajax to get sentiment value of text
-                        $.ajax({
-                          type: "POST",
-                          url: "/sentiment/",
-                          data: conversationText,
-                          success: function(data) {
-                            console.log(data)
+                          else{
+                            cb({status:'failure'})
                           }
-                        });
+                        }
                       });
                   }
               });
