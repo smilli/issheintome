@@ -44,19 +44,23 @@ $(document).ready(function(){
 
 
           // facebook user ID of friend (romantic interest) selected
-          var romIntID = selectedFriendIds[0]
+          var romIntID = selectedFriendIds[0];
+          FB.api('/'+selectedFriendIds[0], function(response){
+            romInt = {'id': selectedFriendIds[0], 'name': response.name};
+            console.log(romInt);
+          });
 
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:800}, function(response){
-            getConversationText(response.data, function(text){
+            getConversationText(response.data, function(data){
               if(status=='failure'){
                 // some response displayed to user like 'no messages available for selected friend'
               } else{
                 // ajax to get sentiment value of text
                 $.ajax({
-                  type: "POST",
+                  type: "POST", 
                   url: "/sentiment/",
-                  data: text,
+                  data: data,
                   success: function(data) {
                     // animate sentiment percentage update
                     var $sentiment = $('#sentiment');
