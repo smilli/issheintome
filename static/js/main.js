@@ -58,7 +58,18 @@ $(document).ready(function(){
                   url: "/sentiment/",
                   data: text,
                   success: function(data) {
-                    console.log(data)
+                    // animate sentiment percentage update
+                    var $sentiment = $('#sentiment');
+                    var currentVal = $sentiment.text();
+                    var endVal = data;
+                    var updatePercentage = setInterval(function(){
+                      if(currentVal == endVal){
+                        clearInterval(updatePercentage);
+                      } else{
+                        currentVal++;
+                        $sentiment.text(currentVal);
+                      }
+                    }, 100);
                   }
                 });
               }
