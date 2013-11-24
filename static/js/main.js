@@ -133,7 +133,8 @@ $(document).ready(function(){
               cb({status:'failure', name: romInterest.name});
             }
           });
-      }
+      },
+      autoDeselection: true
   });
 
   window.fbAsyncInit = function() {

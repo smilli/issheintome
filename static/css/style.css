@@ -72,9 +72,12 @@ html , body{
 }
 
 #percentage{
+	background: url('../img/percent-button.png') no-repeat;
 	font-family: 'Lily Script One', cursive;
 	font-size: 80px;
 	color: #fff;
+	width: 200px;
+	height: 200px;
 }
 
 #share{
