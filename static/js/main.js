@@ -55,7 +55,6 @@ $(document).ready(function(){
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:20}, function(response){
             if (!response || response.error){
-              console.log(response.error);
               $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
             } else{
               filterConversations(response);
@@ -72,9 +71,8 @@ function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
 
   function handleConversationSentiment(data){
-    console.log(data);
     if(data.status=='failure'){
-      $message.html("You haven't talked to " + data.name + " in forever!  Try someone else.");
+      $message.html(data.name + "hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
     } else{
       // remove handler on find-friend
       $findFriendImg.off();
