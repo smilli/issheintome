@@ -138,9 +138,11 @@ function filterConversations(response){
             }
           }
 
-          // call callback with text as parameter
-          cb({text: text, status: 'success', name: romInterest.name});
-          return;
+          // call callback with text as parameter as long as something was added
+          if(text != ''){
+            cb({text: text, status: 'success', name: romInterest.name});
+            return;
+          }
         }
       }
     }
