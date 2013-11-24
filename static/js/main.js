@@ -59,7 +59,7 @@ $(document).ready(function(){
           FB.api('/me/inbox', {limit:20}, function(response){
             getConversationText(response.data, function(data){
               console.log(data);
-              if(status=='failure'){
+              if(data.status=='failure'){
                 $message.innerHTML = "You haven't even talked to " + data.name + " in forever!";
               } else{
                 // ajax to get sentiment value of text
