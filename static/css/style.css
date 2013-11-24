@@ -18,15 +18,14 @@ html , body{
 }
 
 #header {
-	
-	position: relative;
-	top: 20%;
-	left: 40%;
+	position: absolute;
+	top: -120px;
+	right: 0%;
 	
 }
 
 #content_box{
-	position: absolute;
+	position: relative;
 	height: 50%;
 	width: 50%;
 	top: 30%;
