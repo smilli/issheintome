@@ -1,5 +1,3 @@
-{% csrf_token %}
-
 $(document).ready(function(){
   // using jQuery
   function getCookie(name) {
