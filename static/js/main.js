@@ -40,18 +40,22 @@ window.fbAsyncInit = function() {
 
               // look up conversations with romantic interest
               accessToken = response.authResponse.accessToken;
-              var userID;
+              var conversationData;
               FB.api('/me/inbox', {limit:800}, function(response){
-                for (var i = 0; i < response.length; i++){
-                  // if there are only two people in this conversation
-                  if (response[i].to.data.length == 2){
-                    if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
-                      // change this to only return data from 
-                      console.log(response[i].comments.data)
+                console.log(response);
+                conversationData = getConversationData(response)
+                function getConversationData(response){
+                  for (var i = 0; i < response.length; i++){
+                    // if there are only two people in this conversation
+                    if (response[i].to.data.length == 2){
+                      if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
+                        // change this to only return data from 
+                        return response[i].comments.data
+                      }
                     }
                   }
                 }
-              })
+              });
           } else {
             //user cancelled login or did not grant authorization
           }
