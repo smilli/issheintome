@@ -27,15 +27,19 @@ window.fbAsyncInit = function() {
       button.innerHTML = 'Login';
       button.onclick = function() {
         FB.login(function(response) {
-      if (response.authResponse) {
-        console.log(response);
-            FB.api('/me', function(response) {
-          var userInfo = document.getElementById('user-info');
-          userInfo.innerHTML = 
-                '<img src="https://graph.facebook.com/' 
-            + response.id + '/picture" style="margin-right:5px"/>' 
-            + response.name;
-        });    
+          if (response.authResponse) {
+              accessToken = response.authResponse.accessToken;
+              console.log(accessToken);
+              FB.api('/me/friends', function(response){
+                console.log(response);
+              })
+              FB.api('/me', function(response) {
+                var userInfo = document.getElementById('user-info');
+                userInfo.innerHTML = 
+                      '<img src="https://graph.facebook.com/' 
+                  + response.id + '/picture" style="margin-right:5px"/>' 
+                  + response.name;
+              });    
           } else {
             //user cancelled login or did not grant authorization
           }
