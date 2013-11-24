@@ -17,6 +17,17 @@ window.fbAsyncInit = function() {
         FB.login(function(response) {
           if (response.authResponse) {
               $("#authentication").fadeOut(3000);
+              TDFriendSelector.init({debug: true});
+              romanceSelector = TDFriendSelector.newInstance({
+                  callbackSubmit: function(selectedFriendIds) {
+                      console.log("The following friends were selected: " + selectedFriendIds.join(", "));
+                  }
+              });
+
+              $("#choose-friend").click(function (e) {
+                  e.preventDefault();
+                  romanceSelector.showFriendSelector();
+              });
               accessToken = response.authResponse.accessToken;
               var userID;
               FB.api('/me', function(response) {
