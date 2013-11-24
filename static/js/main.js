@@ -77,7 +77,9 @@ $(document).ready(function(){
                             link: 'http://issheintome.herokuapp.com/',
                             caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
                           }, function(response){
-                            // put some sort of try again code?
+                            if (response && response.post_id) {
+                              $("#share-img").animate({opacity: 0});
+                            }
                           });
                         })
                       } else{
