@@ -41,25 +41,8 @@ html , body{
 	display:block;
 }
 
-#container1{
-	position:relative;
-	margin:0px;
-}
-
-#container2{
-	position:relative;
-}
-
 #authentication{
 	display:block;
-}
-
-#connect-container{
-	float: left;
-}
-
-#friend-container{
-	float: left;
 }
 
 #fb-auth { 
