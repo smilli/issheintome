@@ -41,7 +41,8 @@ window.fbAsyncInit = function() {
                           for (var i = 0; i < convos.length; i++){
                             // if there are only two people in this conversation
                             if (convos[i].to.data.length == 2){
-                              if (convos[i].to.data[0]==romIntID || convos[i].to.data[1]==romIntID){
+                              // if the romantic interest is in the conversation
+                              if (convos[i].to.data[0].id==romIntID || convos[i].to.data[1].id==romIntID){
                                 // change this to only return data from 
                                 return convos[i].comments.data
                               }
