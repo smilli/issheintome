@@ -133,7 +133,8 @@ $(document).ready(function(){
               cb({status:'failure', name: romInterest.name});
             }
           });
-      }
+      },
+      friendsPerPage : 5
   });
 
   window.fbAsyncInit = function() {
