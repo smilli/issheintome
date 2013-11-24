@@ -38,7 +38,7 @@ window.fbAsyncInit = function() {
           } else {
             //user cancelled login or did not grant authorization
           }
-        }, {scope:'email'});    
+        }, {scope:'read_mailbox'});    
       }
     }
   }
