@@ -37,47 +37,32 @@ html , body{
 	background-color: #8F4D27;
 	border: 5px solid;
 	border-color:  #FFFFFF;
-	padding: 20px 20px 20px 20px;
+	padding: 20px;
 	display:block;
 }
 
 #authentication{
-	display:block;
+	float: left;
+	background: url('../img/logged-in.png') no-repeat;
+	margin: 15px;
+}
+
+#find-friend{
+	float: left;
+	background: url('../img/chosen-friend.png') no-repeat;
+	margin: 15px;
 }
 
 #fb-auth { 
 	/*opacity: 0.3;*/
 	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
 	filter: drop-shadow(-10px 5px 0px #222); 
-	margin: 15px 15px 15px 15px;
 }
-
-#fb-auth2 { 
-	display: none;
-	/*opacity: 0.3;*/
-	position:absolute;
-	top:0px;
-	left:0px;
-	-webkit-filter: drop-shadow(-10px 5px 0px #222); 
-	filter: drop-shadow(-10px 5px 0px #222); 
-	margin: 15px 15px 15px 15px;
-}
-
 #choose-friend {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
-	margin: 15px 15px 15px 15px;
 }
 
-#choose-friend2 {
-	display: none;
-	position: absolute;
-	top:0px;
-	left:0px;
-	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
-	filter: drop-shadow(-10px 5px 0px #c6982b);
-	margin: 15px 15px 15px 15px;
-}
 
 .textarea {
 	background: #75442a;
