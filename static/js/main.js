@@ -62,12 +62,10 @@ $(document).ready(function(){
                   success: function(data) {
                     // animate sentiment percentage update
                     console.log(data)
-                    data2 = $.parseJSON(data);
-                    console.log(data)
+                    data = $.parseJSON(data);
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
-                    var endVal = data2.sentiment;
-                    console.log(endVal)
+                    var endVal = data.sentiment;
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
                         clearInterval(updatePercentage);
@@ -77,7 +75,7 @@ $(document).ready(function(){
                           FB.ui({
                             method: 'feed',
                             link: 'http://issheintome.herokuapp.com/',
-                            caption: data2.name + ' has a ' + endVal + '% romantic interest in me!',
+                            caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
                           }, function(response){
                             // put some sort of try again code?
                           });

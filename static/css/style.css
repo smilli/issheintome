@@ -69,7 +69,13 @@ html , body{
 	filter: drop-shadow(-10px 5px 0px #c6982b);
 }
 
-#percentage {
+#percentage{
+	font-family: 'Lily Script One', cursive;
+	font-size: 80px;
+	color: #fff;
+}
+
+#percentage-img {
 	position: relative;
 	-webkit-filter: drop-shadow(-10px 5px 0px #BC674A); 
 	filter: drop-shadow(-10px 5px 0px #BC674A);
@@ -81,13 +87,10 @@ html , body{
 }
 
 
-#sentiment {
+#percentage-num {
 	position: absolute;
 	top:80px;
 	left: 525px;
-	font-family: 'Lily Script One', cursive;
-	font-size: 80px;
-	color: #fff;
 }
 
 
