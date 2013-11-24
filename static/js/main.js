@@ -31,6 +31,9 @@ $.ajaxSetup({
     }
 });
 
+// Initialize friend selector
+TDFriendSelector.init({debug: true});
+
 window.fbAsyncInit = function() {
   FB.init({ appId: '618524414871055', 
         status: true, 
@@ -56,7 +59,6 @@ window.fbAsyncInit = function() {
               var conversationData;
 
               // friend selector code
-              TDFriendSelector.init({debug: true});
               romanceSelector = TDFriendSelector.newInstance({
                   maxSelection: 1,
                   callbackSubmit: function(selectedFriendIds) {
