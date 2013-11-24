@@ -49,6 +49,7 @@ $(document).ready(function(){
 
           // get conversation data of selectedfriend
           FB.api('/me/inbox', {limit:800}, function(response){
+            console.log(response);
             getConversationText(response.data, function(data){
               if(status=='failure'){
                 // some response displayed to user like 'no messages available for selected friend'
