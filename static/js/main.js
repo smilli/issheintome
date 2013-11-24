@@ -36,10 +36,9 @@ window.fbAsyncInit = function() {
                       FB.api('/me/inbox', {limit:800}, function(response){
                         console.log(response);
                         conversationData = getConversationData(response.data)
+                        console.log(conversationData)
                         function getConversationData(convos){
                           for (var i = 0; i < convos.length; i++){
-                            console.log(romIntID);
-                            console.log(convos[i].to.data);
                             // if there are only two people in this conversation
                             if (convos[i].to.data.length == 2){
                               if (convos[i].to.data[0]==romIntID || convos[i].to.data[1]==romIntID){
