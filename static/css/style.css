@@ -59,7 +59,7 @@ html , body{
 }
 
 
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1600px){
 	#content_box{
 		width: 75%;
 		left: 9%;
