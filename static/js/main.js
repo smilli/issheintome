@@ -46,7 +46,7 @@ $(document).ready(function(){
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
-
+          console.log(selectedFriendIds)
           // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
             romInterest = {'id': selectedFriendIds[0], 'name': response.name};
