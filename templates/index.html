@@ -15,7 +15,7 @@
 				<h1>is she into me?<h1>
 			</div>
 
-			<h2>Login to Facebook and agree to permissions!</h2>
+			<p>Login to Facebook and agree to permissions!</p>
 
 			
 
@@ -23,16 +23,11 @@
 			<div id="user-info"></div>
 			<img id="fb-auth" class = "centered" src = "{{ STATIC_URL }}img/fbbutton.png" height = "200" width = "200">
 
-			<!-- <h2>
-				Choose a friend:
-				<input class = "textarea" type="text">
-
-				</input>
-			</h2> -->
-		</div>
-
-		<div id = "footer">
-
+			<div id = "choose-friend">
+				<p>Choose a friend:</p>
+					<input class = "textarea" type="text"></input>
+			</div>
+			
 		</div>
 
 		
@@ -40,6 +35,12 @@
 		<div id="fb-root"></div>
 		<script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 
-
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+			 
+			    $("#choose-friend").fadeIn(3000);
+			});
+		</script>
 	</body>
 </html>

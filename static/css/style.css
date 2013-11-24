@@ -13,6 +13,7 @@ Red: #8F4D27;
 
 html , body{
 	background-color: #80BCA3;
+	display:block;
 
 
 }
@@ -21,6 +22,7 @@ html , body{
 	position: absolute;
 	top: -120px;
 	right: 0%;
+	display:block;
 	
 }
 
@@ -34,14 +36,13 @@ html , body{
 	border: 5px solid;
 	border-color:  #FFFFFF;
 	padding: 20px 20px 20px 20px;
-
-	
-
+	display:block;
 }
 
-#footer{
 
-	
+#choose-friend{
+	display:none;
+
 }
 
 .textarea {
@@ -49,6 +50,10 @@ html , body{
 	border: 1px solid #999;
 	outline: 0;
 	font-family: 'Crete Round', serif;
+	display:block;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
 
 }
 
@@ -68,12 +73,14 @@ h1{
 		 -2px 2px #E5E5E5,
 		 -3px 3px #E5E5E5,
 		 -4px 4px #E5E5E5;
+	display:block;
 }
 
-h2{
+p {
 	text-align: center;
 	color: #FFFFFF;
 	font-family: 'Crete Round', serif;
 	font-size: 16px;
 	font-weight: normal;
+	display:block;
 }
