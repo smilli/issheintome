@@ -46,7 +46,10 @@ html , body{
 
 
 #choose-friend{
-	display:none;
+	display:inline;
+	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
+	filter: drop-shadow(-10px 5px 0px #c6982b);
+	margin-left: 15px;
 
 }
 
