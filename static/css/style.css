@@ -39,6 +39,10 @@ html , body{
 	display:block;
 }
 
+#authentication{
+	display:block;
+}
+
 
 #choose-friend{
 	display:none;
