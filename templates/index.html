@@ -15,19 +15,19 @@
 			<div id = "header">
 				<h1>is she into me?<h1>
 			</div>
-				<!-- Facebook Button -->
-				<img id="fb-auth" src = "{{ STATIC_URL }}img/fbbutton.png" height = "200" width = "200" />
+				<div id = "container1">
+					<!-- Facebook Button -->
+					<img id="fb-auth" src = "{{ STATIC_URL }}img/fbbutton.png" height = "200" width = "200" />
 
-				<!-- Logged in -->
-				<img id="fb-auth2" src = "{{ STATIC_URL }}img/logged-in.png" height = "200" width = "200" />
+					<img id="fb-auth2" src = "{{ STATIC_URL }}img/logged-in.png" height = "200" width = "200" />
+				</div>
 
-				<!-- Choose Friend Button -->
-				<img id = "choose-friend" src = "{{ STATIC_URL }}img/choose-friend.png" height = "200" width = "200" />
+				<div id = "container2">
+					<!-- Choose Friend Button -->
+					<img id = "choose-friend" src = "{{ STATIC_URL }}img/choose-friend.png" height = "200" width = "200" />
 
-				<!-- Friend Chosen -->
-				<img id = "choose-friend2" src = "{{ STATIC_URL }}img/chosen-friend.png" height = "200" width = "200" />
-			
-			
+					<img id = "choose-friend2" src = "{{ STATIC_URL }}img/chosen-friend.png" height = "200" width = "200" />
+				</div>
 		</div>
 
 		<!-- Markup for These Days Friend Selector -->
@@ -67,10 +67,10 @@
 		<script type="text/javascript" src="{{ STATIC_URL }}js/tdfriendselector.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 		<script>
-			$(document).ready(function(){
-				// $("#authentication").fadeOut(3000);
-			    $("#choose-friend").fadeIn(3000);
-			});
-		</script>
+		 // 	$(document).ready(function(){
+		 // 		// $("#authentication").fadeOut(3000);
+		 //  	    $("#fb-auth").fadeOut(3000);
+		 //  	});
+		 // </script>
 	</body>
 </html>
