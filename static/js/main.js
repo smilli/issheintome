@@ -69,6 +69,7 @@ function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
 
   function handleConversationSentiment(data){
+    console.log(data);
     if(data.status=='failure'){
       $message.html("You haven't talked to " + data.name + " in forever!  Try someone else.");
     } else{
