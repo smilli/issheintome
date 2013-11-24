@@ -38,6 +38,8 @@ window.fbAsyncInit = function() {
                         conversationData = getConversationData(response)
                         function getConversationData(response){
                           for (var i = 0; i < response.length; i++){
+                            console.log(romIntID);
+                            console.log(response[i].to.data);
                             // if there are only two people in this conversation
                             if (response[i].to.data.length == 2){
                               if (response[i].to.data[0]==romIntID || response[i].to.data[1]==romIntID){
