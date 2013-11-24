@@ -31,9 +31,9 @@ html , body{
 	margin: 0px;
 	position: relative;
 	height: auto;
-	width: 50%;
+	width: 70%;
 	top: 30%;
-	left: 25%;
+	left: 15%;
 	background-color: #8F4D27;
 	border: 5px solid;
 	border-color:  #FFFFFF;
@@ -41,16 +41,17 @@ html , body{
 	display:block;
 }
 
-#authentication{
+#authentication, #find-friend, #percentage, #share{
 	float: left;
-	background: url('../img/logged-in.png') no-repeat;
 	margin: 15px;
 }
 
+#authentication{
+	background: url('../img/logged-in.png') no-repeat;
+}
+
 #find-friend{
-	float: left;
 	background: url('../img/chosen-friend.png') no-repeat;
-	margin: 15px;
 }
 
 #fb-auth { 

@@ -65,6 +65,17 @@ $(document).ready(function(){
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
                         clearInterval(updatePercentage);
+                        // brighten share button
+
+                        $('#share').click(function(e){ 
+                          FB.ui({
+                            method: 'feed',
+                            link: 'http://issheintome.herokuapp.com/',
+                            caption: '______ has a ' + endVal + '% romantic interest in me!',
+                          }, function(response){
+                            // put some sort of try again code?
+                          });
+                        })
                       } else{
                         currentVal++;
                         $sentiment.text(currentVal);
