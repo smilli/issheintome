@@ -46,7 +46,7 @@ $(document).ready(function(){
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
-          console.log(selectedFriendIds)
+        if(selectedFriendIds.length > 0){
           // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
             romInterest = {'id': selectedFriendIds[0], 'name': response.name};
@@ -61,6 +61,9 @@ $(document).ready(function(){
               filterConversations(response);
             }
           });
+        } else{
+          $message.html('Please select someone!')
+        }
       },
       friendsPerPage : 5
   });
