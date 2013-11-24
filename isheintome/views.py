@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import urllib
-import urlib2
+import urllib2
 
 def index(request):
 	return render_to_response('index.html', context_instance=RequestContext(request))
