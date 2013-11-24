@@ -33,6 +33,10 @@ window.fbAsyncInit = function() {
               FB.api('/me/friends', function(response){
                 console.log(response);
               })
+              var query = encodeURIComponent('SELECT body FROM message WHERE author_id=1699845596')
+              FB.api('/fql?q=' + query, function(response){
+                console.log(response)
+              })
               FB.api('/me/inbox', {limit:800}, function(response){
                 console.log(response)
               })
