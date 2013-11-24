@@ -35,6 +35,60 @@ $(document).ready(function(){
   // Initialize friend selector
   TDFriendSelector.init({debug: true});
 
+  // friend selector code (and basically everything else in the callbacks)
+  romanceSelector = TDFriendSelector.newInstance({
+      maxSelection: 1,
+      callbackSubmit: function(selectedFriendIds) {
+          // facebook user ID of friend (romantic interest) selected
+          var romIntID = selectedFriendIds[0]
+
+          // get conversation data of selectedfriend
+          FB.api('/me/inbox', {limit:800}, function(response){
+            getConversationText(response.data, function(text){
+              if(status=='failure'){
+                // some response displayed to user like 'no messages available for selected friend'
+              } else{
+                // ajax to get sentiment value of text
+                $.ajax({
+                  type: "POST",
+                  url: "/sentiment/",
+                  data: text,
+                  success: function(data) {
+                    console.log(data)
+                  }
+                });
+              }
+            });
+
+            function getConversationText(convos, cb){
+              for (var i = 0; i < convos.length; i++){
+                // if there are only two people in this conversation
+                if (convos[i].to.data.length == 2){
+                  // if the romantic interest is in the conversation
+                  if (convos[i].to.data[0].id==romIntID || convos[i].to.data[1].id==romIntID){
+                    // change this to only return data from 
+                    var messages = convos[i].comments.data;
+
+                    // concatenate all messages from romantic interest into big blob of text
+                    var text = '';
+                    for (var i = 0; i < messages.length; i++){
+                      if (messages[i].from.id==romIntID){
+                        text += ' ' + messages[i].message;
+                      }
+                    }
+
+                    // call callback with text as parameter
+                    cb({text: text, status: 'success'});
+                    return;
+                  }
+                }
+              }
+              cb({status:'failure'});
+            }
+          });
+      }
+  });
+
   window.fbAsyncInit = function() {
     FB.init({ appId: '618524414871055', 
           status: true, 
@@ -46,72 +100,22 @@ $(document).ready(function(){
       var button = document.getElementById('fb-auth');
           
       if (response.authResponse) {
-        // put stuff to automatically show choose friends here
+        // automatically add checkmark over button here
+
+        $("#choose-friend").click(function (e) {
+            e.preventDefault();
+            romanceSelector.showFriendSelector();
+        });
+
       } else {
         //user is not connected to your app or logged out
         button.innerHTML = 'Login';
         button.onclick = function() {
           FB.login(function(response) {
             if (response.authResponse) {
-                // fade out the authentication
-                $("#authentication").fadeOut(3000);
 
                 // text of conversation
                 var conversationData;
-
-                // friend selector code
-                romanceSelector = TDFriendSelector.newInstance({
-                    maxSelection: 1,
-                    callbackSubmit: function(selectedFriendIds) {
-                        // facebook user ID of friend (romantic interest) selected
-                        var romIntID = selectedFriendIds[0]
-
-                        // get conversation data of selectedfriend
-                        FB.api('/me/inbox', {limit:800}, function(response){
-                          getConversationText(response.data, function(text){
-                            if(status=='failure'){
-                              // some response displayed to user like 'no messages available for selected friend'
-                            } else{
-                              // ajax to get sentiment value of text
-                              $.ajax({
-                                type: "POST",
-                                url: "/sentiment/",
-                                data: text,
-                                success: function(data) {
-                                  console.log(data)
-                                }
-                              });
-                            }
-                          });
-
-                          function getConversationText(convos, cb){
-                            for (var i = 0; i < convos.length; i++){
-                              // if there are only two people in this conversation
-                              if (convos[i].to.data.length == 2){
-                                // if the romantic interest is in the conversation
-                                if (convos[i].to.data[0].id==romIntID || convos[i].to.data[1].id==romIntID){
-                                  // change this to only return data from 
-                                  var messages = convos[i].comments.data;
-
-                                  // concatenate all messages from romantic interest into big blob of text
-                                  var text = '';
-                                  for (var i = 0; i < messages.length; i++){
-                                    if (messages[i].from.id==romIntID){
-                                      text += ' ' + messages[i].message;
-                                    }
-                                  }
-
-                                  // call callback with text as parameter
-                                  cb({text: text, status: 'success'});
-                                  return;
-                                }
-                              }
-                            }
-                            cb({status:'failure'});
-                          }
-                        });
-                    }
-                });
 
                 $("#choose-friend").click(function (e) {
                     e.preventDefault();
