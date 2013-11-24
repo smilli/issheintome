@@ -54,6 +54,12 @@ html , body{
 	background: url('../img/chosen-friend.png') no-repeat;
 }
 
+#percentage{
+	font-family: 'Lily Script One', cursive;
+	font-size: 80px;
+	color: #fff;
+}
+
 #share{
 	background: url('../img/shared.png') no-repeat;
 }
@@ -67,12 +73,6 @@ html , body{
 #find-friend-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
-}
-
-#percentage{
-	font-family: 'Lily Script One', cursive;
-	font-size: 80px;
-	color: #fff;
 }
 
 #percentage-img {

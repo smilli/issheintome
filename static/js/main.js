@@ -40,7 +40,7 @@ $(document).ready(function(){
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
           // hide choose-friend img to show checkmark bg
-          $("#choose-friend").animate({opacity: 0});
+          $("#find-friend-img").animate({opacity: 0});
 
           // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
@@ -71,7 +71,7 @@ $(document).ready(function(){
                         clearInterval(updatePercentage);
                         // brighten share button
 
-                        $('#share').click(function(e){ 
+                        $('#share-img').click(function(e){ 
                           FB.ui({
                             method: 'feed',
                             link: 'http://issheintome.herokuapp.com/',
@@ -128,13 +128,13 @@ $(document).ready(function(){
           oauth: true});
 
     function updateButton(response) {
-      var button = document.getElementById('fb-auth');
+      var button = document.getElementById('auth-img');
           
       if (response.authResponse) {
-        // hide fb-auth img to show checkmark bg
-        $("#fb-auth").animate({opacity: 0});
+        // hide auth img to show checkmark bg
+        $("#auth-img").animate({opacity: 0});
 
-        $("#choose-friend").click(function (e) {
+        $("#find-friend-img").click(function (e) {
             e.preventDefault();
             romanceSelector.showFriendSelector();
         });
@@ -146,9 +146,9 @@ $(document).ready(function(){
           FB.login(function(response) {
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
-                $("#fb-auth").animate({opacity: 0});
+                $("#auth-img").animate({opacity: 0});
 
-                $("#choose-friend").click(function (e) {
+                $("#find-friend-img").click(function (e) {
                     e.preventDefault();
                     romanceSelector.showFriendSelector();
                 });
