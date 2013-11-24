@@ -68,8 +68,8 @@ window.fbAsyncInit = function() {
                       // get conversation data of selectedfriend
                       FB.api('/me/inbox', {limit:800}, function(response){
                         console.log(response);
-                        conversationData = getConversationText(response.data)
-                        console.log(conversationData)
+                        conversationText = getConversationText(response.data)
+                        console.log(conversationText)
                         function getConversationText(convos){
                           for (var i = 0; i < convos.length; i++){
                             // if there are only two people in this conversation
@@ -96,7 +96,7 @@ window.fbAsyncInit = function() {
                       $.ajax({
                         type: "POST",
                         url: "/sentiment/",
-                        data: text,
+                        data: conversationText,
                         success: function(data) {
                           console.log(data)
                         }
