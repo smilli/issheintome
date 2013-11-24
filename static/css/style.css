@@ -31,9 +31,9 @@ html , body{
 	margin: 0px;
 	position: relative;
 	height: auto;
-	width: 70%;
+	width: 60%;
 	top: 30%;
-	left: 15%;
+	left: 20%;
 	background-color: #8F4D27;
 	border: 5px solid;
 	border-color:  #FFFFFF;
@@ -89,8 +89,8 @@ html , body{
 
 #percentage-num {
 	position: absolute;
-	top:80px;
-	left: 525px;
+	top:85px;
+	left: 520px;
 }
 
 
