@@ -41,12 +41,12 @@ html , body{
 	display:block;
 }
 
-#authentication, #find-friend, #percentage, #share{
+#auth, #find-friend, #percentage, #share{
 	float: left;
 	margin: 15px;
 }
 
-#authentication{
+#auth{
 	background: url('../img/logged-in.png') no-repeat;
 }
 
@@ -54,17 +54,17 @@ html , body{
 	background: url('../img/chosen-friend.png') no-repeat;
 }
 
-#shared{
+#share{
 	background: url('../img/shared.png') no-repeat;
 }
 
-#fb-auth { 
+#auth-img { 
 	/*opacity: 0.3;*/
 	-webkit-filter: drop-shadow(-10px 5px 0px #354347); 
 	filter: drop-shadow(-10px 5px 0px #354347); 
 }
 
-#choose-friend {
+#find-friend-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
 }
@@ -81,7 +81,7 @@ html , body{
 	filter: drop-shadow(-10px 5px 0px #BC674A);
 }
 
-#share {
+#share-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
 	filter: drop-shadow(-10px 5px 0px #778E75);
 }
