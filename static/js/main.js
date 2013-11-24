@@ -64,6 +64,8 @@ $(document).ready(function(){
                     console.log(data)
                     var $sentiment = $('#sentiment');
                     var currentVal = $sentiment.text();
+                    console.log(data['sentiment']);
+                    console.log(data.sentiment);
                     var endVal = data['sentiment'];
                     var updatePercentage = setInterval(function(){
                       if(currentVal == endVal){
