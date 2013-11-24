@@ -19,4 +19,4 @@ def sentiment(request):
 		sentiment = round(sentiment['probability']['pos'] * 100)
 		
 		# return json encoded sentiment value and name of romantic interest
-		return HttpResponse(json.dumps({'sentiment': sentiment, 'name': request.POST['name']}))
+		return HttpResponse(json.dumps({sentiment: sentiment, name: request.POST['name']}))
