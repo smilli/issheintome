@@ -27,6 +27,7 @@ window.fbAsyncInit = function() {
       button.onclick = function() {
         FB.login(function(response) {
           if (response.authResponse) {
+              $("#authentication").fadeOut(3000);
               accessToken = response.authResponse.accessToken;
               var userID;
               FB.api('/me', function(response) {
