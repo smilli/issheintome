@@ -18,8 +18,7 @@ window.fbAsyncInit = function() {
       });
       button.onclick = function() {
         FB.logout(function(response) {
-          var userInfo = document.getElementById('user-info');
-          userInfo.innerHTML="";
+          // put stuff to do after user is logged out
     });
       };
     } else {
@@ -29,24 +28,24 @@ window.fbAsyncInit = function() {
         FB.login(function(response) {
           if (response.authResponse) {
               accessToken = response.authResponse.accessToken;
-              console.log(accessToken);
+              var userID;
+              FB.api('/me', function(response) {
+                userID = response.id
+              });    
+              FB.api('/me/inbox', {limit:800}, function(response){
+                for (var i = 0; i < response.length; i++){
+                  // if there are only two people in this conversation
+                  if (response[i].to.data.length == 2){
+                    if (response[i].to.data[0]==romIntID or response[i].to.data[1]==romIntID){
+                      // change this to only return data from 
+                      return response[i].comments.data
+                    }
+                  }
+                }
+              })
               FB.api('/me/friends', function(response){
                 console.log(response);
               })
-              var query = encodeURIComponent('SELECT body FROM message WHERE author_id=1699845596')
-              FB.api('/fql?q=' + query, function(response){
-                console.log(response)
-              })
-              FB.api('/me/inbox', {limit:800}, function(response){
-                console.log(response)
-              })
-              FB.api('/me', function(response) {
-                var userInfo = document.getElementById('user-info');
-                userInfo.innerHTML = 
-                      '<img src="https://graph.facebook.com/' 
-                  + response.id + '/picture" style="margin-right:5px"/>' 
-                  + response.name;
-              });    
           } else {
             //user cancelled login or did not grant authorization
           }
