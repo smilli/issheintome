@@ -54,6 +54,14 @@ html , body{
 	display:block;
 }
 
+#connect-container{
+	display: inline;
+}
+
+#friend-container{
+	display: inline;
+}
+
 #fb-auth { 
 	display: inline;
 	/*opacity: 0.3;*/
