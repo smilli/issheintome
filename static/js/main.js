@@ -106,7 +106,6 @@ $(document).ready(function(){
       if (response.authResponse) {
         // add checkmark image
         $("#fb-auth2").show();
-        $("#fb-auth").hide();
 
         $("#choose-friend").click(function (e) {
             e.preventDefault();
@@ -121,7 +120,6 @@ $(document).ready(function(){
             if (response.authResponse) {
                 // add checkmark image
                 $("#fb-auth2").show();
-                $("#fb-auth").hide();
 
                 $("#choose-friend").click(function (e) {
                     e.preventDefault();
