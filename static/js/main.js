@@ -68,7 +68,6 @@ $(document).ready(function(){
   });
 
 function filterConversations(response){
-  console.log(response)
   getConversationText(response.data, handleConversationSentiment);
 
   function handleConversationSentiment(data){
