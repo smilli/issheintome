@@ -66,18 +66,42 @@ html , body{
 		width: 75%;
 		left: 9%;
 	}
+
+	h1{
+		font-size: 60px;
+	}
 }
 
-@media screen and (max-width: 480px) {
+
+@media screen and (min-width: 630px) and (max-width:1243px){
+
 	#content_box{
-		width: 75%;
+		width: 460px;
+	}
+}
+
+
+@media screen and (min-width: 1440px){
+
+	h1{
+		font-size: 60px;
+	}
+}
+
+@media screen and (max-width: 630px) {
+	#content_box{
+		width: 230px;
 		left: 5%;
-		margin-bottom: 15%;
+		margin-bottom: 30%;
 		margin-top: 10%;
 	}
 
+	#header{
+		top:-100px;
+	}
+
 	h1{
-		font-size: 50px;
+		font-size: 40px;
 	}
 
 	html, body{
@@ -182,7 +206,6 @@ html , body{
 h1{
 	font-family: 'Lily Script One', cursive;
 	color: #8F4D27;
-	font-size: 60px;
 	font-weight: normal;
 	text-shadow: 
 		 -1px 1px #E5E5E5,
