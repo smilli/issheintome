@@ -50,7 +50,8 @@ html , body{
 	margin: 0px;
 	position: relative;
 	height: auto;
-	width: 60%;
+	width: auto;
+	max-width: 58em;
 	left: 15%;
 	background-color: #8F4D27;
 	border: 5px solid;
