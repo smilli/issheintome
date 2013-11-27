@@ -111,20 +111,23 @@ html , body{
 	    width: auto\9; /* ie8 */
 }
 
-#auth-img { 
+#auth-img { /*fb-auth image*/
 	/*opacity: 0.3;*/
 	-webkit-filter: drop-shadow(-10px 5px 0px #354347); 
 	filter: drop-shadow(-10px 5px 0px #354347); 
+	cursor: pointer;
 }
 
 #find-friend-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
+	cursor: pointer;
 }
 
 #share-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
 	filter: drop-shadow(-10px 5px 0px #778E75);
+	cursor: pointer;
 }
 
 
