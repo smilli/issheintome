@@ -68,6 +68,23 @@ html , body{
 	}
 }
 
+@media screen and (max-width: 480px) {
+	#content_box{
+		width: 75%;
+		left: 5%;
+		margin-bottom: 15%;
+		margin-top: 10%;
+	}
+
+	h1{
+		font-size: 50px;
+	}
+
+	html, body{
+		overflow:scroll;
+	}
+}
+
 
 #message{
 	font-family: 'Crete Round', serif;
