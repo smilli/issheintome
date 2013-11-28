@@ -64,8 +64,10 @@ $(document).ready(function(){
     max: 1,
     showButtonSelectAll: false,
     showSelectedCount: true,
-    lang.title: "Select a friend",
-    lang.buttonSubmit: "OK"
+    lang{
+      title: "Select a friend",
+      buttonSubmit: "OK"
+    } 
   });
 
  /* // friend selector code (and basically everything else in the callbacks)
