@@ -83,7 +83,7 @@ function activateFriendSelctor(){
   });
 }
 
-function handleConversationSentiment(msgs){
+function handleConversations(msgs){
   if(msgs.length==0){
 
     $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
