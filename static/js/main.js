@@ -72,72 +72,75 @@ function activateFriendSelctor(){
   });
 }
 
-function filterConversations(response){
-  getConversationText(response.data, handleConversationSentiment);
+function handleConversations(msgs){
+  if(msgs.length==0){
 
-  function handleConversationSentiment(data){
-    if(data.status=='failure'){
-      $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
-    } else{
-      // remove handler on find-friend
-      $findFriendImg.off();
+    $message.html(romInterest.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
+  
+  } else{
 
-      // hide choose-friend img to show checkmark bg
-      $findFriendImg.animate({opacity: 0});
-      $findFriendImg.css({
-        visibility: 'hidden',
-        cursor: 'default'
-      });
-      $("#percentage").removeClass('black');
+    var text = concatenateMessages(msgs);
 
-      // ajax to get sentiment value of text
-      $.ajax({
-        type: "POST", 
-        url: "/sentiment/",
-        data: data,
-        success: function(data) {
-          // animate sentiment percentage update
-          data = $.parseJSON(data);
-          var $sentiment = $('#sentiment');
-          var currentVal = $sentiment.text();
-          var endVal = data.sentiment;
-          var updatePercentage = setInterval(function(){
-            if(currentVal == endVal){
-              clearInterval(updatePercentage);
-              $('#share').removeClass('black');
+    // remove handler on find-friend
+    $findFriendImg.off();
 
-              var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
+    // hide choose-friend img to show checkmark bg
+    $findFriendImg.animate({opacity: 0});
+    $findFriendImg.css({
+      visibility: 'hidden',
+      cursor: 'default'
+    });
+    $("#percentage").removeClass('black');
 
-              $shareImg.click(function(e){ 
-                FB.ui({
-                  method: 'feed',
-                  link: 'http://issheintome.herokuapp.com/',
-                  name: data.name + ' has a ' + endVal + '% romantic interest in me!',
-                  caption: data.message,
-                  picture: imgUrl,
-                  description: 'Ever wondered how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend to give you an interest score.'
-                }, function(response){
-                  if (response && response.post_id) {
-                    $shareImg.animate({opacity: 0});
-                    $shareImg.css({
-                      visibility: 'hidden',
-                      cursor: 'default'
-                    });
-                    $("#share").removeClass('black');
-                    $shareImg.off();
-                  }
-                });
+    // add user name to data
+    data = {text: text, name: romInterest.name};
+    // ajax to get sentiment value of text
+    $.ajax({
+      type: "POST", 
+      url: "/sentiment/",
+      data: data,
+      success: function(data) {
+        // animate sentiment percentage update
+        data = $.parseJSON(data);
+        var $sentiment = $('#sentiment');
+        var currentVal = $sentiment.text();
+        var endVal = data.sentiment;
+        var updatePercentage = setInterval(function(){
+          if(currentVal == endVal){
+            clearInterval(updatePercentage);
+            $('#share').removeClass('black');
+
+            // display funny image
+            $message.html(data.message);
+
+            var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
+
+            $shareImg.click(function(e){ 
+              FB.ui({
+                method: 'feed',
+                link: 'http://issheintome.herokuapp.com/',
+                name: data.name + ' has a ' + endVal + '% romantic interest in me!',
+                caption: data.message,
+                picture: imgUrl,
+                description: 'Ever wondered how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend to give you an interest score.'
+              }, function(response){
+                if (response && response.post_id) {
+                  $shareImg.animate({opacity: 0});
+                  $shareImg.css({
+                    visibility: 'hidden',
+                    cursor: 'default'
+                  });
+                  $("#share").removeClass('black');
+                  $shareImg.off();
+                }
               });
-
-              $message.html(data.message);
-            } else{
-              currentVal++;
-              $sentiment.text(currentVal);
-            }
-          }, 100);
-        }
-      });
-    }
+          } else{
+            currentVal++;
+            $sentiment.text(currentVal);
+          }
+        }, 100);
+      }
+    });
   }
 
   function getConversationText(convos, cb){
