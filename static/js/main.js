@@ -40,13 +40,33 @@ $(document).ready(function(){
   $message = $('#message');
 
   $findFriendImg.fSelector({
-    onSubmit: function(response){
-      console.log(response);
+    onSubmit: function(selectedFriendIds){
+     if(selectedFriendIds.length > 0){
+        // get name of romantic interest and create dict romInterest w/ id & name
+        FB.api('/'+selectedFriendIds[0], function(response){
+          romInterest = {'id': selectedFriendIds[0], 'name': response.name};
+        });
+
+        // get conversation data of selectedfriend
+        FB.api('/me/inbox', {limit:20}, function(response){
+          if (!response || response.error){
+            $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+          } else{
+            filterConversations(response);
+          }
+        });
+      } else{
+        $message.html('Please select someone!')
+      }
     },
-    facebookInvite: false
+    facebookInvite: false,
+    closeOnSubmit: true,
+    max: 1,
+    showButtonSelectAll: false,
+    showSelectedCount: true
   });
 
-  /*// friend selector code (and basically everything else in the callbacks)
+ /* // friend selector code (and basically everything else in the callbacks)
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
