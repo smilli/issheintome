@@ -271,7 +271,6 @@
 
 
     $('#fs-dialog input').keyup(function(){
-      console.log('keyup')
       _find($(this));
     });
 
@@ -366,6 +365,7 @@
 
     search_text_base = $.trim(t.val());
     var search_text = search_text_base.toLowerCase().replace(/\s/gi, '+');
+    console.log(search_text)
 
     var elements = $('#fs-user-list .fs-fullname[value*='+search_text+']');
 
