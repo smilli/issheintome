@@ -110,7 +110,9 @@ function filterConversations(response){
                 FB.ui({
                   method: 'feed',
                   link: 'http://issheintome.herokuapp.com/',
-                  caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
+                  caption: 'IsSheIntoMe?',
+                  picture: '../img/logo.png',
+                  description: data.name + ' has a ' + endVal + '% romantic interest in me!',
                 }, function(response){
                   if (response && response.post_id) {
                     $shareImg.animate({opacity: 0});
