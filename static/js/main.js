@@ -121,9 +121,6 @@ function handleConversations(msgs){
             clearInterval(updatePercentage);
             $('#share').removeClass('black');
 
-            // display funny image
-            $message.html(data.message);
-
             var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
 
             $shareImg.click(function(e){ 
@@ -147,6 +144,7 @@ function handleConversations(msgs){
               });
             });
 
+            $message.html(data.message);
           } else{
             currentVal++;
             $sentiment.text(currentVal);
