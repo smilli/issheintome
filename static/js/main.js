@@ -42,7 +42,8 @@ $(document).ready(function(){
   $findFriendImg.fSelector({
     onSubmit: function(response){
       console.log(response);
-    }
+    },
+    facebookInvite: false
   });
 
   /*// friend selector code (and basically everything else in the callbacks)
