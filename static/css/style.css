@@ -152,7 +152,6 @@ html , body{
     height: auto;
     width: auto\9; /* ie8 */
 	cursor: pointer;
-	visibility: 'visibile';
 }
 
 #auth-img { /*fb-auth image*/

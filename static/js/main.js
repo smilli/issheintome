@@ -83,7 +83,8 @@ function filterConversations(response){
       $findFriendImg.off();
 
       // hide choose-friend img to show checkmark bg
-      $findFriendImg.animate({visibility: 'hidden'});
+      $findFriendImg.fadeOut();
+      $findFriendImg.css("visibilty", "hidden")
       $("#percentage").removeClass('black');
 
       // ajax to get sentiment value of text
@@ -109,7 +110,8 @@ function filterConversations(response){
                   caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
                 }, function(response){
                   if (response && response.post_id) {
-                    $shareImg.animate({visibility: 'hidden'});
+                    $shareImg.fadeOut();
+                    $shareImg.css("visibilty", "hidden")
                     $("#share").removeClass('black');
                     $shareImg.off();
                   }
@@ -167,7 +169,8 @@ function filterConversations(response){
           
       if (response.authResponse) {
         // hide auth img to show checkmark bg
-        $authImg.animate({visibility: 'hidden'});
+        $authImg.fadeOut();
+        $authImg.css("visibilty", "hidden")
         $("#find-friend").removeClass('black');
         activateFriendSelctor();
 
@@ -178,7 +181,8 @@ function filterConversations(response){
           FB.login(function(response) {
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
-                $authImg.animate({visibility: 'hidden'});
+                $authImg.fadeOut();
+                $authImg.css("visibilty", "hidden")
                 $("#find-friend").removeClass('black');
 
                 // remove handler for logging in
