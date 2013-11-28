@@ -134,6 +134,7 @@ function handleConversations(msgs){
                   $shareImg.off();
                 }
               });
+            });
           } else{
             currentVal++;
             $sentiment.text(currentVal);
