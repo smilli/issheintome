@@ -64,7 +64,7 @@ $(document).ready(function(){
     max: 1,
     showButtonSelectAll: false,
     showSelectedCount: true,
-    lang{
+    lang: {
       title: "Select a friend",
       buttonSubmit: "OK"
     } 
