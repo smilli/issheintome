@@ -154,10 +154,11 @@ function handleConversations(msgs){
 }
 
 function concatenateMessages(convos){
-  text = ''
+  text = '';
   for (var i = 0; i < convos.length; i++){
-    text += convos[i]
+    text += convos[i];
   }
+  return text;
 }
 
   window.fbAsyncInit = function() {
