@@ -106,12 +106,14 @@ function filterConversations(response){
               clearInterval(updatePercentage);
               $('#share').removeClass('black');
 
+              var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
+
               $shareImg.click(function(e){ 
                 FB.ui({
                   method: 'feed',
                   link: 'http://issheintome.herokuapp.com/',
                   caption: 'IsSheIntoMe?',
-                  picture: '../img/logo.png',
+                  picture: imgUrl,
                   description: data.name + ' has a ' + endVal + '% romantic interest in me!',
                 }, function(response){
                   if (response && response.post_id) {
