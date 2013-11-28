@@ -50,6 +50,7 @@ function activateFriendSelctor(){
           query1 = encodeURIComponent('SELECT thread_id FROM thread WHERE folder_id=0')
           query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
           FB.api('/fql?q='+query, function(response){
+            console.log(response)
             if (!response || response.error){
               $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
             } else{
@@ -91,7 +92,6 @@ function handleConversations(msgs){
   } else{
 
     var text = concatenateMessages(msgs);
-    console.log(text)
 
     // remove handler on find-friend
     $findFriendImg.off();
@@ -106,8 +106,6 @@ function handleConversations(msgs){
 
     // add user name to data
     data = {text: text, name: romInterest.name};
-    console.log(data)
-
     // ajax to get sentiment value of text
     $.ajax({
       type: "POST", 
