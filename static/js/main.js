@@ -84,7 +84,10 @@ function filterConversations(response){
 
       // hide choose-friend img to show checkmark bg
       $findFriendImg.animate({opacity: 0});
-      $findFriendImg.css("visibilty", "hidden");
+      $findFriendImg.css({
+        visibility: 'hidden',
+        cursor: 'default'
+      });
       $("#percentage").removeClass('black');
 
       // ajax to get sentiment value of text
@@ -111,7 +114,10 @@ function filterConversations(response){
                 }, function(response){
                   if (response && response.post_id) {
                     $shareImg.animate({opacity: 0});
-                    $shareImg.css("visibilty", "hidden");
+                    $shareImg.css({
+                      visibility: 'hidden',
+                      cursor: 'default'
+                    });
                     $("#share").removeClass('black');
                     $shareImg.off();
                   }
@@ -170,7 +176,10 @@ function filterConversations(response){
       if (response.authResponse) {
         // hide auth img to show checkmark bg
         $authImg.animate({opacity: 0});
-        $authImg.css("visibilty", "hidden");
+        $authImg.css({
+          visibility: 'hidden',
+          cursor: 'default'
+        });
         $("#find-friend").removeClass('black');
         activateFriendSelctor();
 
@@ -182,7 +191,10 @@ function filterConversations(response){
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
                 $authImg.animate({opacity: 0});
-                $authImg.css("visibilty", "hidden");
+                $authImg.css({
+                  visibility: 'hidden',
+                  cursor: 'default'
+                });
                 $("#find-friend").removeClass('black');
 
                 // remove handler for logging in
