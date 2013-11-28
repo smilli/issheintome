@@ -24,8 +24,8 @@
       return false;
     }
 
-    fsOptions.onPreStart();
     fsOptions = $.extend(true, {}, defaults, fsOptions);
+    fsOptions.onPreStart();
 
     if ( fsOptions.max > 0 && fsOptions.max !== null ) {
       fsOptions.showSelectedCount = true;
