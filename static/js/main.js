@@ -91,6 +91,7 @@ function handleConversations(msgs){
   } else{
 
     var text = concatenateMessages(msgs);
+    console.log(text)
 
     // remove handler on find-friend
     $findFriendImg.off();
@@ -105,6 +106,7 @@ function handleConversations(msgs){
 
     // add user name to data
     data = {text: text, name: romInterest.name};
+    console.log(data)
 
     // ajax to get sentiment value of text
     $.ajax({
