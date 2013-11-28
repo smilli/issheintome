@@ -90,7 +90,7 @@ function handleConversations(msgs){
   
   } else{
 
-    var text = concatenateMessages(data);
+    var text = concatenateMessages(msgs);
 
     // remove handler on find-friend
     $findFriendImg.off();
