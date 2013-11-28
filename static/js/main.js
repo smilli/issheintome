@@ -63,7 +63,9 @@ $(document).ready(function(){
     closeOnSubmit: true,
     max: 1,
     showButtonSelectAll: false,
-    showSelectedCount: true
+    showSelectedCount: true,
+    lang.title: "Select a friend",
+    lang.buttonSubmit: "OK"
   });
 
  /* // friend selector code (and basically everything else in the callbacks)
