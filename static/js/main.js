@@ -50,7 +50,11 @@ function activateFriendSelctor(){
           query1 = encodeURIComponent('SELECT thread_id FROM thread WHERE folder_id=0')
           query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
           FB.api('/fql?q='+query, function(response){
-            console.log(response);
+            if (!response || response.error){
+              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+            } else{
+              filterConversations(response);
+            }
           })
         });
 
@@ -83,7 +87,7 @@ function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
 
   function handleConversationSentiment(data){
-    if(data.status=='failure'){
+    if(data.length==0){
       $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
     } else{
       // remove handler on find-friend
