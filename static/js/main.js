@@ -32,9 +32,6 @@ $(document).ready(function(){
       }
   });
 
-  // Initialize friend selector
-  TDFriendSelector.init({debug: false});
-
   // images
   $authImg = $("#auth-img");
   $findFriendImg = $("#find-friend-img");
@@ -42,7 +39,13 @@ $(document).ready(function(){
 
   $message = $('#message');
 
-  // friend selector code (and basically everything else in the callbacks)
+  $findFriendImg.fSelector({
+    onSubmit: function(response){
+      console.log(response);
+    }
+  });
+
+  /*// friend selector code (and basically everything else in the callbacks)
   romanceSelector = TDFriendSelector.newInstance({
       maxSelection: 1,
       callbackSubmit: function(selectedFriendIds) {
@@ -65,7 +68,7 @@ $(document).ready(function(){
         }
       },
       friendsPerPage : 5
-  });
+  });*/
 
 function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
