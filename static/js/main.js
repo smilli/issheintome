@@ -46,16 +46,27 @@ function activateFriendSelctor(){
         // get name of romantic interest and create dict romInterest w/ id & name
         FB.api('/'+selectedFriendIds[0], function(response){
           romInterest = {'id': selectedFriendIds[0], 'name': response.name};
+
+          query1 = encodeURIComponent('SELECT thread_id FROM thread WHERE folder_id=0')
+          query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
+          FB.api('/fql?q='+query, function(response){
+            if (!response || response.error){
+              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+            } else{
+              handleConversations(response.data);
+            }
+          })
         });
 
         // get conversation data of selectedfriend
-        FB.api('/me/inbox', {limit:20}, function(response){
+        /*FB.api('/me/inbox', {limit:20}, function(response){
           if (!response || response.error){
             $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
           } else{
             filterConversations(response);
           }
-        });
+        });*/
+
       } else{
         $message.html('Please select someone!')
       }
@@ -72,101 +83,79 @@ function activateFriendSelctor(){
   });
 }
 
-function filterConversations(response){
-  getConversationText(response.data, handleConversationSentiment);
+function handleConversations(msgs){
+  if(msgs.length==0){
 
-  function handleConversationSentiment(data){
-    if(data.status=='failure'){
-      $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
-    } else{
-      // remove handler on find-friend
-      $findFriendImg.off();
+    $message.html(romInterest.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
+  
+  } else{
 
-      // hide choose-friend img to show checkmark bg
-      $findFriendImg.animate({opacity: 0});
-      $findFriendImg.css({
-        visibility: 'hidden',
-        cursor: 'default'
-      });
-      $("#percentage").removeClass('black');
+    var text = concatenateMessages(msgs);
 
-      // ajax to get sentiment value of text
-      $.ajax({
-        type: "POST", 
-        url: "/sentiment/",
-        data: data,
-        success: function(data) {
-          // animate sentiment percentage update
-          data = $.parseJSON(data);
-          var $sentiment = $('#sentiment');
-          var currentVal = $sentiment.text();
-          var endVal = data.sentiment;
-          var updatePercentage = setInterval(function(){
-            if(currentVal == endVal){
-              clearInterval(updatePercentage);
-              $('#share').removeClass('black');
+    // remove handler on find-friend
+    $findFriendImg.off();
 
-              var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
+    // hide choose-friend img to show checkmark bg
+    $findFriendImg.animate({opacity: 0});
+    $findFriendImg.css({
+      visibility: 'hidden',
+      cursor: 'default'
+    });
+    $("#percentage").removeClass('black');
 
-              $shareImg.click(function(e){ 
-                FB.ui({
-                  method: 'feed',
-                  link: 'http://issheintome.herokuapp.com/',
-                  name: data.name + ' has a ' + endVal + '% romantic interest in me!',
-                  caption: data.message,
-                  picture: imgUrl,
-                  description: 'Ever wondered how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend to give you an interest score.'
-                }, function(response){
-                  if (response && response.post_id) {
-                    $shareImg.animate({opacity: 0});
-                    $shareImg.css({
-                      visibility: 'hidden',
-                      cursor: 'default'
-                    });
-                    $("#share").removeClass('black');
-                    $shareImg.off();
-                  }
-                });
+    // add user name to data
+    data = {text: text, name: romInterest.name};
+    // ajax to get sentiment value of text
+    $.ajax({
+      type: "POST", 
+      url: "/sentiment/",
+      data: data,
+      success: function(data) {
+        // animate sentiment percentage update
+        data = $.parseJSON(data);
+        var $sentiment = $('#sentiment');
+        var currentVal = $sentiment.text();
+        var endVal = data.sentiment;
+        var updatePercentage = setInterval(function(){
+          if(currentVal == endVal){
+            clearInterval(updatePercentage);
+            $('#share').removeClass('black');
+
+            $shareImg.click(function(e){ 
+              FB.ui({
+                method: 'feed',
+                link: 'http://issheintome.herokuapp.com/',
+                caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
+              }, function(response){
+                if (response && response.post_id) {
+                  $shareImg.animate({opacity: 0});
+                  $shareImg.css({
+                    visibility: 'hidden',
+                    cursor: 'default'
+                  });
+                  $("#share").removeClass('black');
+                  $shareImg.off();
+                }
               });
+            });
 
-              $message.html(data.message);
-            } else{
-              currentVal++;
-              $sentiment.text(currentVal);
-            }
-          }, 100);
-        }
-      });
-    }
-  }
-
-  function getConversationText(convos, cb){
-    for (var i = 0; i < convos.length; i++){
-      // if there are only two people in this conversation
-      if (convos[i].to.data.length == 2){
-        // if the romantic interest is in the conversation
-        if (convos[i].to.data[0].id==romInterest.id || convos[i].to.data[1].id==romInterest.id){
-          // change this to only return data from 
-          var messages = convos[i].comments.data;
-
-          // concatenate all messages from romantic interest into big blob of text
-          var text = '';
-          for (var i = 0; i < messages.length; i++){
-            if (messages[i].from.id==romInterest.id){
-              text += ' ' + messages[i].message;
-            }
+            $message.html(data.message);
+          } else{
+            currentVal++;
+            $sentiment.text(currentVal);
           }
-
-          // call callback with text as parameter as long as something was added
-          if(text != ''){
-            cb({text: text, status: 'success', name: romInterest.name});
-            return;
-          }
-        }
+        }, 100);
       }
-    }
-    cb({status:'failure', name: romInterest.name});
+    });
   }
+}
+
+function concatenateMessages(convos){
+  text = '';
+  for (var i = 0; i < convos.length; i++){
+    text += convos[i];
+  }
+  return text;
 }
 
   window.fbAsyncInit = function() {
@@ -231,8 +220,3 @@ function filterConversations(response){
   }());
 
 });
-
-
-
-
-
