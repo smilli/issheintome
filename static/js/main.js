@@ -46,6 +46,14 @@ function activateFriendSelctor(){
         // get name of romantic interest and create dict romInterest w/ id & name
         FB.api('/'+selectedFriendIds[0], function(response){
           romInterest = {'id': selectedFriendIds[0], 'name': response.name};
+
+          FB.api('/fql?q=SELECT+body+FROM+message+WHERE+authorID='+romInterest.id, function(response){
+            if (!response || response.error){
+              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+            } else{
+              filterConversations(response);
+            }
+          })
         });
 
         // get conversation data of selectedfriend
@@ -57,13 +65,6 @@ function activateFriendSelctor(){
           }
         });*/
 
-        FB.api('/fql?q=SELECT+body+FROM+message+WHERE+authorID='+romInterest.id, function(response){
-          if (!response || response.error){
-            $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
-          } else{
-            filterConversations(response);
-          }
-        })
       } else{
         $message.html('Please select someone!')
       }
