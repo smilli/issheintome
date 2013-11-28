@@ -49,13 +49,21 @@ function activateFriendSelctor(){
         });
 
         // get conversation data of selectedfriend
-        FB.api('/me/inbox', {limit:20}, function(response){
+        /*FB.api('/me/inbox', {limit:20}, function(response){
           if (!response || response.error){
             $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
           } else{
             filterConversations(response);
           }
-        });
+        });*/
+
+        FB.api('/fql?q=SELECT+body+FROM+message+WHERE+authorID='+romInterest.id, function(response){
+          if (!response || response.error){
+            $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+          } else{
+            filterConversations(response);
+          }
+        })
       } else{
         $message.html('Please select someone!')
       }
@@ -226,8 +234,3 @@ function filterConversations(response){
   }());
 
 });
-
-
-
-
-
