@@ -271,7 +271,6 @@
 
 
     $('#fs-dialog input').keyup(function(){
-      console.log('keyup')
       _find($(this));
     });
 
