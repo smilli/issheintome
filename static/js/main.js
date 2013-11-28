@@ -165,7 +165,7 @@ function filterConversations(response){
 }
 
   window.fbAsyncInit = function() {
-    FB.init({ appId: '1400427420196243', 
+    FB.init({ appId: '618524414871055', 
           status: true, 
           cookie: true,
           xfbml: true,
