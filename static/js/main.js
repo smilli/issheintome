@@ -113,9 +113,9 @@ function filterConversations(response){
                   method: 'feed',
                   link: 'http://issheintome.herokuapp.com/',
                   name: data.name + ' has a ' + endVal + '% romantic interest in me!',
-                  caption: 'IsSheIntoMe?',
+                  caption: data.message,
                   picture: imgUrl,
-                  description: 'Ever wanted to know how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend and gives you back an interest score.'
+                  description: 'Ever wondered how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend to give you an interest score.'
                 }, function(response){
                   if (response && response.post_id) {
                     $shareImg.animate({opacity: 0});
