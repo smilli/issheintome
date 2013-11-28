@@ -86,10 +86,15 @@ function activateFriendSelctor(){
 function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
 
-  function handleConversationSentiment(data){
-    if(data.length==0){
+  function handleConversationSentiment(msgs){
+    if(msgs.length==0){
+      
       $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
+    
     } else{
+
+      var text = concatenateMessages(data);
+
       // remove handler on find-friend
       $findFriendImg.off();
 
@@ -100,6 +105,9 @@ function filterConversations(response){
         cursor: 'default'
       });
       $("#percentage").removeClass('black');
+
+      // add user name to data
+      data = {'text': text, 'name': romInterest.name};
 
       // ajax to get sentiment value of text
       $.ajax({
@@ -146,32 +154,10 @@ function filterConversations(response){
     }
   }
 
-  function getConversationText(convos, cb){
-    for (var i = 0; i < convos.length; i++){
-      // if there are only two people in this conversation
-      if (convos[i].to.data.length == 2){
-        // if the romantic interest is in the conversation
-        if (convos[i].to.data[0].id==romInterest.id || convos[i].to.data[1].id==romInterest.id){
-          // change this to only return data from 
-          var messages = convos[i].comments.data;
-
-          // concatenate all messages from romantic interest into big blob of text
-          var text = '';
-          for (var i = 0; i < messages.length; i++){
-            if (messages[i].from.id==romInterest.id){
-              text += ' ' + messages[i].message;
-            }
-          }
-
-          // call callback with text as parameter as long as something was added
-          if(text != ''){
-            cb({text: text, status: 'success', name: romInterest.name});
-            return;
-          }
-        }
-      }
-    }
-    cb({status:'failure', name: romInterest.name});
+function concatenateMessages(convos){
+  text = ''
+  for (var i = 0; i < convos.length; i++){
+    text += convos[i]
   }
 }
 
