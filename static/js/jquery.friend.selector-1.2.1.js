@@ -366,8 +366,8 @@
 
     search_text_base = $.trim(t.val());
 
-    if ( search_text_base === '' ){
-      $.each(container.children();, function(){
+    if(search_text_base === ''){
+      $.each(container.children(), function(){
         $(this).show();
       });
 
