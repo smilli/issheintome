@@ -172,7 +172,7 @@ html , body{
 }
 
 /* creates darkened effect on buttons */
-.black {
+#content_box .black {
 	background: url('../img/black.png') no-repeat;
 	opacity: 0.2;
 	cursor: default;
