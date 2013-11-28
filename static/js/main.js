@@ -46,16 +46,27 @@ function activateFriendSelctor(){
         // get name of romantic interest and create dict romInterest w/ id & name
         FB.api('/'+selectedFriendIds[0], function(response){
           romInterest = {'id': selectedFriendIds[0], 'name': response.name};
+
+          query1 = encodeURIComponent('SELECT thread_id FROM thread WHERE folder_id=0')
+          query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
+          FB.api('/fql?q='+query, function(response){
+            if (!response || response.error){
+              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+            } else{
+              handleConversations(response.data);
+            }
+          })
         });
 
         // get conversation data of selectedfriend
-        FB.api('/me/inbox', {limit:20}, function(response){
+        /*FB.api('/me/inbox', {limit:20}, function(response){
           if (!response || response.error){
             $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
           } else{
             filterConversations(response);
           }
-        });
+        });*/
+
       } else{
         $message.html('Please select someone!')
       }
@@ -110,9 +121,6 @@ function handleConversations(msgs){
             clearInterval(updatePercentage);
             $('#share').removeClass('black');
 
-            // display funny image
-            $message.html(data.message);
-
             var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
 
             $shareImg.click(function(e){ 
@@ -135,6 +143,8 @@ function handleConversations(msgs){
                 }
               });
             });
+
+            $message.html(data.message);
           } else{
             currentVal++;
             $sentiment.text(currentVal);
@@ -143,38 +153,18 @@ function handleConversations(msgs){
       }
     });
   }
+}
 
-  function getConversationText(convos, cb){
-    for (var i = 0; i < convos.length; i++){
-      // if there are only two people in this conversation
-      if (convos[i].to.data.length == 2){
-        // if the romantic interest is in the conversation
-        if (convos[i].to.data[0].id==romInterest.id || convos[i].to.data[1].id==romInterest.id){
-          // change this to only return data from 
-          var messages = convos[i].comments.data;
-
-          // concatenate all messages from romantic interest into big blob of text
-          var text = '';
-          for (var i = 0; i < messages.length; i++){
-            if (messages[i].from.id==romInterest.id){
-              text += ' ' + messages[i].message;
-            }
-          }
-
-          // call callback with text as parameter as long as something was added
-          if(text != ''){
-            cb({text: text, status: 'success', name: romInterest.name});
-            return;
-          }
-        }
-      }
-    }
-    cb({status:'failure', name: romInterest.name});
+function concatenateMessages(convos){
+  text = '';
+  for (var i = 0; i < convos.length; i++){
+    text += convos[i];
   }
+  return text;
 }
 
   window.fbAsyncInit = function() {
-    FB.init({ appId: '618524414871055', 
+    FB.init({ appId: '1400427420196243', 
           status: true, 
           cookie: true,
           xfbml: true,
@@ -235,8 +225,3 @@ function handleConversations(msgs){
   }());
 
 });
-
-
-
-
-
