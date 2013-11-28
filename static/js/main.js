@@ -53,7 +53,7 @@ function activateFriendSelctor(){
             if (!response || response.error){
               $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
             } else{
-              filterConversations(response);
+              handleConversations(response.data);
             }
           })
         });
@@ -83,76 +83,73 @@ function activateFriendSelctor(){
   });
 }
 
-function filterConversations(response){
-  getConversationText(response.data, handleConversationSentiment);
+function handleConversationSentiment(msgs){
+  if(msgs.length==0){
 
-  function handleConversationSentiment(msgs){
-    if(msgs.length==0){
-      
-      $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
-    
-    } else{
+    $message.html(data.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
+  
+  } else{
 
-      var text = concatenateMessages(data);
+    var text = concatenateMessages(data);
 
-      // remove handler on find-friend
-      $findFriendImg.off();
+    // remove handler on find-friend
+    $findFriendImg.off();
 
-      // hide choose-friend img to show checkmark bg
-      $findFriendImg.animate({opacity: 0});
-      $findFriendImg.css({
-        visibility: 'hidden',
-        cursor: 'default'
-      });
-      $("#percentage").removeClass('black');
+    // hide choose-friend img to show checkmark bg
+    $findFriendImg.animate({opacity: 0});
+    $findFriendImg.css({
+      visibility: 'hidden',
+      cursor: 'default'
+    });
+    $("#percentage").removeClass('black');
 
-      // add user name to data
-      data = {'text': text, 'name': romInterest.name};
+    // add user name to data
+    data = {'text': text, 'name': romInterest.name};
 
-      // ajax to get sentiment value of text
-      $.ajax({
-        type: "POST", 
-        url: "/sentiment/",
-        data: data,
-        success: function(data) {
-          // animate sentiment percentage update
-          data = $.parseJSON(data);
-          var $sentiment = $('#sentiment');
-          var currentVal = $sentiment.text();
-          var endVal = data.sentiment;
-          var updatePercentage = setInterval(function(){
-            if(currentVal == endVal){
-              clearInterval(updatePercentage);
-              $('#share').removeClass('black');
+    // ajax to get sentiment value of text
+    $.ajax({
+      type: "POST", 
+      url: "/sentiment/",
+      data: data,
+      success: function(data) {
+        // animate sentiment percentage update
+        data = $.parseJSON(data);
+        var $sentiment = $('#sentiment');
+        var currentVal = $sentiment.text();
+        var endVal = data.sentiment;
+        var updatePercentage = setInterval(function(){
+          if(currentVal == endVal){
+            clearInterval(updatePercentage);
+            $('#share').removeClass('black');
 
-              $shareImg.click(function(e){ 
-                FB.ui({
-                  method: 'feed',
-                  link: 'http://issheintome.herokuapp.com/',
-                  caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
-                }, function(response){
-                  if (response && response.post_id) {
-                    $shareImg.animate({opacity: 0});
-                    $shareImg.css({
-                      visibility: 'hidden',
-                      cursor: 'default'
-                    });
-                    $("#share").removeClass('black');
-                    $shareImg.off();
-                  }
-                });
+            $shareImg.click(function(e){ 
+              FB.ui({
+                method: 'feed',
+                link: 'http://issheintome.herokuapp.com/',
+                caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
+              }, function(response){
+                if (response && response.post_id) {
+                  $shareImg.animate({opacity: 0});
+                  $shareImg.css({
+                    visibility: 'hidden',
+                    cursor: 'default'
+                  });
+                  $("#share").removeClass('black');
+                  $shareImg.off();
+                }
               });
+            });
 
-              $message.html(data.message);
-            } else{
-              currentVal++;
-              $sentiment.text(currentVal);
-            }
-          }, 100);
-        }
-      });
-    }
+            $message.html(data.message);
+          } else{
+            currentVal++;
+            $sentiment.text(currentVal);
+          }
+        }, 100);
+      }
+    });
   }
+}
 
 function concatenateMessages(convos){
   text = ''
