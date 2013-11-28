@@ -39,6 +39,39 @@ $(document).ready(function(){
 
   $message = $('#message');
 
+function activateFriendSelctor(){
+  $findFriendImg.fSelector({
+    onSubmit: function(selectedFriendIds){
+     if(selectedFriendIds.length > 0){
+        // get name of romantic interest and create dict romInterest w/ id & name
+        FB.api('/'+selectedFriendIds[0], function(response){
+          romInterest = {'id': selectedFriendIds[0], 'name': response.name};
+        });
+
+        // get conversation data of selectedfriend
+        FB.api('/me/inbox', {limit:20}, function(response){
+          if (!response || response.error){
+            $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+          } else{
+            filterConversations(response);
+          }
+        });
+      } else{
+        $message.html('Please select someone!')
+      }
+    },
+    facebookInvite: false,
+    closeOnSubmit: true,
+    max: 1,
+    showButtonSelectAll: false,
+    showSelectedCount: true,
+    lang: {
+      title: "Select a friend",
+      buttonSubmit: "OK"
+    } 
+  });
+}
+
 function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
 
@@ -136,6 +169,7 @@ function filterConversations(response){
         // hide auth img to show checkmark bg
         $authImg.animate({opacity: 0});
         $("#find-friend").removeClass('black');
+        activateFriendSelctor();
 
       } else {
         //user is not connected to your app or logged out
@@ -152,36 +186,7 @@ function filterConversations(response){
 
                 $findFriendImg.click(function (e) {
                     e.preventDefault();
-                    $findFriendImg.fSelector({
-                      onSubmit: function(selectedFriendIds){
-                       if(selectedFriendIds.length > 0){
-                          // get name of romantic interest and create dict romInterest w/ id & name
-                          FB.api('/'+selectedFriendIds[0], function(response){
-                            romInterest = {'id': selectedFriendIds[0], 'name': response.name};
-                          });
-
-                          // get conversation data of selectedfriend
-                          FB.api('/me/inbox', {limit:20}, function(response){
-                            if (!response || response.error){
-                              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
-                            } else{
-                              filterConversations(response);
-                            }
-                          });
-                        } else{
-                          $message.html('Please select someone!')
-                        }
-                      },
-                      facebookInvite: false,
-                      closeOnSubmit: true,
-                      max: 1,
-                      showButtonSelectAll: false,
-                      showSelectedCount: true,
-                      lang: {
-                        title: "Select a friend",
-                        buttonSubmit: "OK"
-                      } 
-                    });
+                    activateFriendSelctor();
                 });
             } else {
               //user cancelled login or did not grant authorization
