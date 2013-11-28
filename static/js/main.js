@@ -104,7 +104,7 @@ function handleConversations(msgs){
     $("#percentage").removeClass('black');
 
     // add user name to data
-    data = {'text': text, 'name': romInterest.name};
+    data = {text: text, name: romInterest.name};
 
     // ajax to get sentiment value of text
     $.ajax({
