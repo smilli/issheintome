@@ -366,8 +366,10 @@
 
     search_text_base = $.trim(t.val());
     var search_text = search_text_base.toLowerCase().replace(/\s/gi, '0');
-    
+    console.log(search_text);
+
     if(search_text==''){
+      console.log('none yay');
       $.each(container.children(), function(){
         $(this).show();
       });
