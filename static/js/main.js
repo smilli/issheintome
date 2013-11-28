@@ -48,6 +48,7 @@ function activateFriendSelctor(){
           romInterest = {'id': selectedFriendIds[0], 'name': response.name};
 
           FB.api('/fql?q=SELECT+body+FROM+message+WHERE+authorID='+romInterest.id, function(response){
+            console.log(repsonse);
             if (!response || response.error){
               $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
             } else{
