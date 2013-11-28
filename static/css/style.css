@@ -50,7 +50,8 @@ html , body{
 	margin: 0px;
 	position: relative;
 	height: auto;
-	width: 60%;
+	width: auto;
+	max-width: 58em;
 	left: 15%;
 	background-color: #8F4D27;
 	border: 5px solid;
@@ -64,6 +65,47 @@ html , body{
 	#content_box{
 		width: 75%;
 		left: 9%;
+	}
+
+	h1{
+		font-size: 60px;
+	}
+}
+
+
+@media screen and (min-width: 630px) and (max-width:1243px){
+
+	#content_box{
+		width: 460px;
+	}
+}
+
+
+@media screen and (min-width: 1440px){
+
+	h1{
+		font-size: 60px;
+	}
+}
+
+@media screen and (max-width: 630px) {
+	#content_box{
+		width: 230px;
+		left: 5%;
+		margin-bottom: 30%;
+		margin-top: 10%;
+	}
+
+	#header{
+		top:-100px;
+	}
+
+	h1{
+		font-size: 40px;
+	}
+
+	html, body{
+		overflow:scroll;
 	}
 }
 
@@ -106,12 +148,13 @@ html , body{
 }
 
 .button{
-		max-width: 100%;
-	    height: auto;
-	    width: auto\9; /* ie8 */
+	max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+	cursor: pointer;
 }
 
-#auth-img { 
+#auth-img { /*fb-auth image*/
 	/*opacity: 0.3;*/
 	-webkit-filter: drop-shadow(-10px 5px 0px #354347); 
 	filter: drop-shadow(-10px 5px 0px #354347); 
@@ -125,8 +168,18 @@ html , body{
 #share-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
 	filter: drop-shadow(-10px 5px 0px #778E75);
+	
 }
 
+/* creates darkened effect on buttons */
+.black {
+	background: url('../img/black.png') no-repeat;
+	opacity: 0.2;
+}
+
+.black img{
+	cursor: default;
+}
 
 #percentage-num {
 	position: relative;
@@ -153,15 +206,9 @@ html , body{
 	margin-right: auto;
 }
 
-.black {
-	background: url('../img/black.png') no-repeat;
-	opacity: 0.2;
-}
-
 h1{
 	font-family: 'Lily Script One', cursive;
 	color: #8F4D27;
-	font-size: 60px;
 	font-weight: normal;
 	text-shadow: 
 		 -1px 1px #E5E5E5,

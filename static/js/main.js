@@ -32,9 +32,6 @@ $(document).ready(function(){
       }
   });
 
-  // Initialize friend selector
-  TDFriendSelector.init({debug: false});
-
   // images
   $authImg = $("#auth-img");
   $findFriendImg = $("#find-friend-img");
@@ -42,30 +39,38 @@ $(document).ready(function(){
 
   $message = $('#message');
 
-  // friend selector code (and basically everything else in the callbacks)
-  romanceSelector = TDFriendSelector.newInstance({
-      maxSelection: 1,
-      callbackSubmit: function(selectedFriendIds) {
-        if(selectedFriendIds.length > 0){
-          // get name of romantic interest and create dict romInterest w/ id & name
-          FB.api('/'+selectedFriendIds[0], function(response){
-            romInterest = {'id': selectedFriendIds[0], 'name': response.name};
-          });
+function activateFriendSelctor(){
+  $findFriendImg.fSelector({
+    onSubmit: function(selectedFriendIds){
+     if(selectedFriendIds.length > 0){
+        // get name of romantic interest and create dict romInterest w/ id & name
+        FB.api('/'+selectedFriendIds[0], function(response){
+          romInterest = {'id': selectedFriendIds[0], 'name': response.name};
+        });
 
-          // get conversation data of selectedfriend
-          FB.api('/me/inbox', {limit:20}, function(response){
-            if (!response || response.error){
-              $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
-            } else{
-              filterConversations(response);
-            }
-          });
-        } else{
-          $message.html('Please select someone!')
-        }
-      },
-      friendsPerPage : 5
+        // get conversation data of selectedfriend
+        FB.api('/me/inbox', {limit:20}, function(response){
+          if (!response || response.error){
+            $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
+          } else{
+            filterConversations(response);
+          }
+        });
+      } else{
+        $message.html('Please select someone!')
+      }
+    },
+    facebookInvite: false,
+    closeOnSubmit: true,
+    max: 1,
+    showButtonSelectAll: false,
+    showSelectedCount: true,
+    lang: {
+      title: "Select a friend",
+      buttonSubmit: "OK"
+    } 
   });
+}
 
 function filterConversations(response){
   getConversationText(response.data, handleConversationSentiment);
@@ -79,6 +84,10 @@ function filterConversations(response){
 
       // hide choose-friend img to show checkmark bg
       $findFriendImg.animate({opacity: 0});
+      $findFriendImg.css({
+        visibility: 'hidden',
+        cursor: 'default'
+      });
       $("#percentage").removeClass('black');
 
       // ajax to get sentiment value of text
@@ -105,6 +114,10 @@ function filterConversations(response){
                 }, function(response){
                   if (response && response.post_id) {
                     $shareImg.animate({opacity: 0});
+                    $shareImg.css({
+                      visibility: 'hidden',
+                      cursor: 'default'
+                    });
                     $("#share").removeClass('black');
                     $shareImg.off();
                   }
@@ -163,12 +176,12 @@ function filterConversations(response){
       if (response.authResponse) {
         // hide auth img to show checkmark bg
         $authImg.animate({opacity: 0});
-        $("#find-friend").removeClass('black');
-
-        $findFriendImg.click(function (e) {
-            e.preventDefault();
-            romanceSelector.showFriendSelector();
+        $authImg.css({
+          visibility: 'hidden',
+          cursor: 'default'
         });
+        $("#find-friend").removeClass('black');
+        activateFriendSelctor();
 
       } else {
         //user is not connected to your app or logged out
@@ -178,6 +191,10 @@ function filterConversations(response){
             if (response.authResponse) {
                 // hide choose-friend img to show checkmark bg
                 $authImg.animate({opacity: 0});
+                $authImg.css({
+                  visibility: 'hidden',
+                  cursor: 'default'
+                });
                 $("#find-friend").removeClass('black');
 
                 // remove handler for logging in
@@ -185,7 +202,7 @@ function filterConversations(response){
 
                 $findFriendImg.click(function (e) {
                     e.preventDefault();
-                    romanceSelector.showFriendSelector();
+                    activateFriendSelctor();
                 });
             } else {
               //user cancelled login or did not grant authorization

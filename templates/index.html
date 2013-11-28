@@ -2,13 +2,12 @@
 
 <html>
 	<head>
-		<title>issheintome</title>
+		<title>Is She Into Me?</title>
 		<link href = "{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" />
-		<link href = "{{ STATIC_URL }}css/tdfriendselector.css" rel="stylesheet" type="text/css" />
-		<link href='http://fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
-		<link rel="icon" type="image/png"
-     href="{{ STATIC_URL }}img/heart.png" />
+		<link href = "{{ STATIC_URL }}css/jquery.friend.selector-1.2.1.css" rel="stylesheet" type="text/css" />
+		<link href='//fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
+		<link href='//fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+		<meta name = "description" content="Ever wanted to find out how your romantic interest feels about you? IsSheIntoMe uses sentiment analysis of your facebook conversations with your romantic interest to give you back an interest score.">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
@@ -42,43 +41,10 @@
 			</div>
 		</div>
 
-
-
-		<!-- Markup for These Days Friend Selector -->
-		<div id="TDFriendSelector">
-			<div class="TDFriendSelector_dialog">
-				<a href="#" id="TDFriendSelector_buttonClose">x</a>
-				<div class="TDFriendSelector_form">
-					<div class="TDFriendSelector_header">
-						<p>Select your friends</p>
-					</div>
-					<div class="TDFriendSelector_content">
-						<p>Then you can invite them to join you in the app.</p>
-						<div class="TDFriendSelector_searchContainer TDFriendSelector_clearfix">
-							<div class="TDFriendSelector_selectedCountContainer"><span class="TDFriendSelector_selectedCount">0</span> / <span class="TDFriendSelector_selectedCountMax">0</span> friends selected</div>
-							<input type="text" placeholder="Search friends" id="TDFriendSelector_searchField" />
-						</div>
-						<div class="TDFriendSelector_friendsContainer"></div>
-					</div>
-					<div class="TDFriendSelector_footer TDFriendSelector_clearfix">
-						<a href="#" id="TDFriendSelector_pagePrev" class="TDFriendSelector_disabled">Previous</a>
-						<a href="#" id="TDFriendSelector_pageNext">Next</a>
-						<div class="TDFriendSelector_pageNumberContainer">
-							Page <span id="TDFriendSelector_pageNumber">1</span> / <span id="TDFriendSelector_pageNumberTotal">1</span>
-						</div>
-						<a href="#" id="TDFriendSelector_buttonOK">OK</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		
-
-		
 		<!-- Loads facebook script and iframes -->
 		<div id="fb-root"></div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="{{ STATIC_URL }}js/tdfriendselector.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.friend.selector-1.2.1.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 		<script>
 		 // 	$(document).ready(function(){
@@ -86,5 +52,17 @@
 		 //  	    $("#fb-auth").fadeOut(3000);
 		 //  	});
 		 // </script>
+
+		 <!-- Google Analytics -->
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-46009452-1', 'issheintome.herokuapp.com');
+			  ga('send', 'pageview');
+
+		</script>
 	</body>
 </html>
