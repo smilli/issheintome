@@ -232,7 +232,7 @@
     var item = $('<li/>');
 
     var link =  '<a class="fs-anchor" href="javascript://">' +
-                  '<input class="fs-fullname" type="hidden" name="fullname[]" value="'+v[k].name.toLowerCase().replace(/\s/gi, "+")+'" />' +
+                  '<input class="fs-fullname" type="hidden" name="fullname[]" value="'+v[k].name.toLowerCase().replace(/\s/gi, "&")+'" />' +
                   '<input class="fs-friends" type="checkbox" name="friend[]" value="fs-'+v[k].id+'" />' +
                   '<img class="fs-thumb" src="https://graph.facebook.com/'+v[k].id+'/picture" />' +
                   '<span class="fs-name">' + _charLimit(v[k].name, 15) + '</span>' +
@@ -364,7 +364,7 @@
     var fs_dialog = $('#fs-dialog');
 
     search_text_base = $.trim(t.val());
-    var search_text = search_text_base.toLowerCase().replace(/\s/gi, '+');
+    var search_text = search_text_base.toLowerCase().replace(/\s/gi, '&');
     console.log(search_text)
 
     var elements = $('#fs-user-list .fs-fullname[value*='+search_text+']');
