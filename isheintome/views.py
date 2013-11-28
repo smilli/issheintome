@@ -11,6 +11,7 @@ def index(request):
 def sentiment(request):
 	if request.method=='POST':
 		url = 'http://text-processing.com/api/sentiment/'
+		print(request.POST)
 		# when we pass text in as post request to api, we cannot have any unicode chars
 		text = request.POST['text'].encode('ascii', 'ignore');
 		# sentiment analysis api limits to 10000 characters, 9900 to be safe
