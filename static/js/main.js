@@ -48,7 +48,7 @@ function activateFriendSelctor(){
           romInterest = {'id': selectedFriendIds[0], 'name': response.name};
 
           query1 = encodeURIComponent('SELECT thread_id FROM thread WHERE folder_id=0')
-          query = encodeURIComponent('SELECT body FROM message WHERE author_id=' + romInterest.id);
+          query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
           FB.api('/fql?q='+query, function(response){
             console.log(response);
           })
