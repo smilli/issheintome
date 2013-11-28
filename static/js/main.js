@@ -121,11 +121,19 @@ function handleConversations(msgs){
             clearInterval(updatePercentage);
             $('#share').removeClass('black');
 
+            // display funny image
+            $message.html(data.message);
+
+            var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
+
             $shareImg.click(function(e){ 
               FB.ui({
                 method: 'feed',
                 link: 'http://issheintome.herokuapp.com/',
-                caption: data.name + ' has a ' + endVal + '% romantic interest in me!',
+                name: data.name + ' has a ' + endVal + '% romantic interest in me!',
+                caption: data.message,
+                picture: imgUrl,
+                description: 'Ever wondered how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend to give you an interest score.'
               }, function(response){
                 if (response && response.post_id) {
                   $shareImg.animate({opacity: 0});
@@ -139,7 +147,6 @@ function handleConversations(msgs){
               });
             });
 
-            $message.html(data.message);
           } else{
             currentVal++;
             $sentiment.text(currentVal);
