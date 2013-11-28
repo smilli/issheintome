@@ -153,25 +153,33 @@ html , body{
 	    width: auto\9; /* ie8 */
 }
 
+#auth-img, #find-friend-img, #share-img{
+	cursor: pointer;
+}
+
 #auth-img { /*fb-auth image*/
 	/*opacity: 0.3;*/
 	-webkit-filter: drop-shadow(-10px 5px 0px #354347); 
 	filter: drop-shadow(-10px 5px 0px #354347); 
-	cursor: pointer;
 }
 
 #find-friend-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #c6982b); 
 	filter: drop-shadow(-10px 5px 0px #c6982b);
-	cursor: pointer;
 }
 
 #share-img {
 	-webkit-filter: drop-shadow(-10px 5px 0px #778E75); 
 	filter: drop-shadow(-10px 5px 0px #778E75);
-	cursor: pointer;
+	
 }
 
+/* creates darkened effect on buttons */
+.black {
+	background: url('../img/black.png') no-repeat;
+	opacity: 0.2;
+	cursor: default;
+}
 
 #percentage-num {
 	position: relative;
@@ -196,11 +204,6 @@ html , body{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.black {
-	background: url('../img/black.png') no-repeat;
-	opacity: 0.2;
 }
 
 h1{
