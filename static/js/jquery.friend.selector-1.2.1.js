@@ -362,14 +362,21 @@
   _find = function(t) {
 
     var fs_dialog = $('#fs-dialog');
+    var container = $('#fs-user-list ul');
 
     search_text_base = $.trim(t.val());
     var search_text = search_text_base.toLowerCase().replace(/\s/gi, '0');
-    console.log(search_text)
+    
+    if(search_text==''){
+      $.each(container.children(), function(){
+        $(this).show();
+      });
+      return;
+    }
 
     var elements = $('#fs-user-list .fs-fullname[value*='+search_text+']');
 
-    var container = $('#fs-user-list ul');
+   
     container.children().hide();
     $.each(elements, function(){
       $(this).parents('li').show();
