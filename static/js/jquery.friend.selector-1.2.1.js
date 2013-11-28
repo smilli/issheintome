@@ -372,7 +372,6 @@
       });
 
       if ( fs_dialog.has('#fs-summary-box').length ){
-
         if ( selected_friend_count === 1 ){
           $('#fs-summary-box').remove();
         }
