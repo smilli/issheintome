@@ -178,7 +178,6 @@
   
   _parseFacebookFriends = function (response) {
     if ( response.error ){
-      console.log(response);
       alert(fsOptions.lang.fbConnectError);
       _close();
       return false;
