@@ -109,7 +109,7 @@ $(document).ready(function(){
               url: "/sentiment/",
               data: data,
               success: function(response){
-                response = $.parseJSON
+                response = $.parseJSON(response)
 
                 if(response.error){
                   $message.html(response.error)      
