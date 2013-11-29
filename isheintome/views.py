@@ -23,7 +23,7 @@ def sentiment(request):
 		req = urllib2.Request(url)
 		response = json.loads(urllib2.urlopen(req).read())
 
-		if (!response || response.error):
+		if not response or response.error:
 			error = "Sorry, Facebook says you've maxed out on your tries!  Try again in a few minutes."
 			return HttpResponse(json.dumps({'error' : error}))
 		
