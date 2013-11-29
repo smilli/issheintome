@@ -11,8 +11,10 @@ def index(request):
 def sentiment(request):
 	if request.method=='POST':
 		text = request.POST['text'].encode('ascii', 'ignore');
+		print(text)
 		values = {'text' : text}
 		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
+		print(blob.sentiment)
 		sentiment = round(blob.sentiment[1] * 100)
 
 		if sentiment <= 10:
