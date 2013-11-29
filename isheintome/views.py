@@ -13,6 +13,7 @@ def index(request):
 def sentiment(request):
 	if request.method=='POST':
 		access_token = request.POST['accessToken']
+		print(request.POST)
 		romInterest = request.POST['romInterest']
 		print(romInterest)
 		query = 'SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id
