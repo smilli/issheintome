@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
+from isheintome.utils import concatenateMsgs
 import json
 import urllib
 import urllib2
@@ -13,18 +14,45 @@ def index(request):
 def sentiment(request):
 	if request.method=='POST':
 		access_token = request.POST['accessToken']
-		print(request.POST)
 		romInterestId = request.POST['romInterest[id]']
 		query = 'SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterestId
 		data = {'q' : query, 'access_token' : access_token}
 		data = urllib.urlencode(data)
-		print(data)
 		url = 'https://graph.facebook.com/fql?' + data
 		req = urllib2.Request(url)
-		response = urllib2.urlopen(req)
-		response = response.read()
-		print(response)
-		return HttpResponse('worked')
+		response = urllib2.urlopen(req).read()
+		msgs = response.data
+		if len(msgs)==0:
+			error = request.POST['romInterest[name]'] + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else."
+			return HttpResponse(json.dumps({'error' : error}))
+		text = concatenateMsgs(msgs)
+		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
+		sentiment = round(blob.sentiment[1] * 100)
+		if sentiment <= 10:
+			message = "Wow.. forever alone"
+		elif 10 < sentiment <= 20:
+			message = "Basically, you're hated"
+		elif 20 < sentiment <= 30:
+			message = "Friend-zoned"
+		elif 30 < sentiment <= 40:
+			message = "Uhh good luck?"
+		elif 40 < sentiment < 50:
+			message = "So close, but so far."
+		elif sentiment == 50:
+			message = "Love-hate relationship?"
+		elif 50 < sentiment < 60:
+			message = "You've got a chance!"
+		elif 60 < sentiment < 70:
+			message = "Make a move already!"
+		elif 70 < sentiment < 80:
+			message = "If you're not dating, you should be."
+		elif 80 < sentiment < 90:
+			message = "I bet you're only doing this to make your friends jealous."
+		elif 90 < sentiment:
+			message = "Wtf just go get a room already"
+		
+		# return json encoded sentiment value and name of romantic interest
+		return HttpResponse(json.dumps({'sentiment' : sentiment, 'name' : request.POST['romInterest[name]'], 'message' : message}))
 
 """def sentiment(request):
 	if request.method=='POST':
