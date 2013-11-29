@@ -39,6 +39,14 @@ $(document).ready(function(){
 
   $message = $('#message');
 
+  // load fb
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol 
+      + '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+
   window.fbAsyncInit = function() {
     FB.init({ appId: '1400427420196243', 
           status: true, 
@@ -94,14 +102,24 @@ $(document).ready(function(){
           FB.api('/'+selectedFriendIds[0], function(response){
             romInterest = {'id': selectedFriendIds[0], 'name': response.name};
 
-            query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
+            data = {accessToken: accessToken, romInterest: romInterest};
+
+            $.ajax({
+            type: "POST", 
+            url: "/sentiment/",
+            data: data,
+            success: function(data){
+              console.log(data)
+            };
+
+            /*query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
             FB.api('/fql?q='+query, function(response){
               if (!response || response.error){
                 $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
               } else{
                 handleConversations(response.data);
               }
-            })
+            })*/
           });
 
         } else{
@@ -200,11 +218,5 @@ function concatenateMessages(convos){
   return text;
 }
       
-  (function() {
-    var e = document.createElement('script'); e.async = true;
-    e.src = document.location.protocol 
-      + '//connect.facebook.net/en_US/all.js';
-    document.getElementById('fb-root').appendChild(e);
-  }());
 
 });

@@ -2,6 +2,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 import json
+import urllib
+import urllib2
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
 
@@ -9,6 +11,19 @@ def index(request):
 	return render_to_response('index.html', context_instance=RequestContext(request))
 
 def sentiment(request):
+	if request.method=='POST':
+		access_token = request.POST['access_token']
+		data = {'q' : query, 'access_token' : access_token}
+		data = urllib.urlencode(data)
+		print(data)
+		url = 'https://graph.facebook.com/fql?' + data
+		req = urllib2.Request(url)
+		response = urllib2.urlopen(req)
+		response = response.read()
+		print(response)
+		return HttpResponse('worked')
+
+"""def sentiment(request):
 	if request.method=='POST':
 		text = request.POST['text'].encode('ascii', 'ignore');
 		print(text)
@@ -41,4 +56,4 @@ def sentiment(request):
 			message = "Wtf just go get a room already"
 		
 		# return json encoded sentiment value and name of romantic interest
-		return HttpResponse(json.dumps({'sentiment' : sentiment, 'name' : request.POST['name'], 'message' : message}))
+		return HttpResponse(json.dumps({'sentiment' : sentiment, 'name' : request.POST['name'], 'message' : message}))"""
