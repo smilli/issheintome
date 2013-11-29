@@ -105,12 +105,13 @@ $(document).ready(function(){
             data = {accessToken: accessToken, romInterest: romInterest};
 
             $.ajax({
-            type: "POST", 
-            url: "/sentiment/",
-            data: data,
-            success: function(data){
-              console.log(data)
-            };
+              type: "POST", 
+              url: "/sentiment/",
+              data: data,
+              success: function(data){
+                console.log(data)
+              }
+            });
 
             /*query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
             FB.api('/fql?q='+query, function(response){
