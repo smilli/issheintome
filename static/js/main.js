@@ -158,10 +158,8 @@ function handleConversations(msgs){
 function concatenateMessages(convos){
   text = '';
   for (var i = 0; i < convos.length; i++){
-    console.log(convos[i]);
-    text += convos[i];
+    text += convos[i].body;
   }
-  console.log(text)
   return text;
 }
 
