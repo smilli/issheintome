@@ -39,6 +39,7 @@ def sentiment(request):
 		print(text)
 		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
 		sentiment = round(blob.sentiment[1] * 100)
+		print(sentiment)
 
 		if sentiment <= 10:
 			message = "Wow.. forever alone"
