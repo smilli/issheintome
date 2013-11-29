@@ -158,13 +158,13 @@ function handleConversations(msgs){
 function concatenateMessages(convos){
   text = '';
   for (var i = 0; i < convos.length; i++){
-    text += convos[i];
+    text += convos[i].body;
   }
   return text;
 }
 
   window.fbAsyncInit = function() {
-    FB.init({ appId: '618524414871055', 
+    FB.init({ appId: '1400427420196243', 
           status: true, 
           cookie: true,
           xfbml: true,
