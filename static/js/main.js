@@ -49,13 +49,13 @@ $(document).ready(function(){
     function updateButton(response) {
       // user is already connected
       if (response.authResponse) {
-        authenticateUser();
+        authenticateUser(response.authResponse.accessToken);
       } else {
       // user is not connected to your app or logged out
        $authImg.click(function(e) {
           FB.login(function(response) {
             if (response.authResponse) {
-                authenticateUser();
+                authenticateUser(response.authResponse.accessToken);
             } else {
               //user cancelled login or did not grant authorization
             }
@@ -66,7 +66,7 @@ $(document).ready(function(){
     }
 
     // hide auth image & allow friend selection
-    function authenticateUser(){
+    function authenticateUser(accessToken){
       // hide choose-friend img to show checkmark bg
       $authImg.animate({opacity: 0});
       $authImg.css({
@@ -78,7 +78,7 @@ $(document).ready(function(){
       // remove handler for logging in
       $authImg.off();
 
-      activateFriendSelector(response.authResponse.accessToken);
+      activateFriendSelector(accessToken);
     }
 
     // run once with current status and whenever the status changes
