@@ -102,7 +102,7 @@ $(document).ready(function(){
           FB.api('/'+selectedFriendIds[0], function(response){
             romInterest = {'id': selectedFriendIds[0], 'name': response.name};
 
-            data = {accessToken: accessToken, romInterest: romInterest};
+            data = {accessToken: accessToken, romInterest: {id: romInterest.id, name: romInterest.name}};
 
             $.ajax({
               type: "POST", 
