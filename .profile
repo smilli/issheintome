@@ -1,0 +1,1 @@
+curl https://raw.github.com/sloria/TextBlob/master/download_corpora.py | python
