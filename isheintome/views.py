@@ -22,8 +22,9 @@ def sentiment(request):
 		url = 'https://graph.facebook.com/fql?' + data
 		req = urllib2.Request(url)
 		response = json.loads(urllib2.urlopen(req).read())
+		print(response)
 
-		if not response or response['error']:
+		if not response or 'error' in response:
 			error = "Sorry, Facebook says you've maxed out on your tries!  Try again in a few minutes."
 			return HttpResponse(json.dumps({'error' : error}))
 		
