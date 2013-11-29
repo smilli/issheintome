@@ -47,7 +47,6 @@ function activateFriendSelctor(){
         FB.api('/'+selectedFriendIds[0], function(response){
           romInterest = {'id': selectedFriendIds[0], 'name': response.name};
 
-          query1 = encodeURIComponent('SELECT thread_id FROM thread WHERE folder_id=0')
           query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
           FB.api('/fql?q='+query, function(response){
             if (!response || response.error){
@@ -173,6 +172,7 @@ function concatenateMessages(convos){
     function updateButton(response) {
           
       if (response.authResponse) {
+        console.log(response)
         // hide auth img to show checkmark bg
         $authImg.animate({opacity: 0});
         $authImg.css({
