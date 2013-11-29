@@ -12,7 +12,7 @@ def index(request):
 
 def sentiment(request):
 	if request.method=='POST':
-		access_token = request.POST['access_token']
+		access_token = request.POST['accessToken']
 		data = {'q' : query, 'access_token' : access_token}
 		data = urllib.urlencode(data)
 		print(data)
