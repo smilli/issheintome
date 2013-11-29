@@ -1,27 +1,19 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
-import urllib
-import urllib2
 import json
+from textblob import TextBlob
+from textblob.sentiments import NaiveBayesAnalyzer
 
 def index(request):
 	return render_to_response('index.html', context_instance=RequestContext(request))
 
 def sentiment(request):
 	if request.method=='POST':
-		url = 'http://text-processing.com/api/sentiment/'
-		# when we pass text in as post request to api, we cannot have any unicode chars
 		text = request.POST['text'].encode('ascii', 'ignore');
-		# sentiment analysis api limits to 10000 characters, 9900 to be safe
-		if len(text) >= 9900:
-			text = text[:9900]
 		values = {'text' : text}
-		data = urllib.urlencode(values)
-		req = urllib2.Request(url, data)
-		response = urllib2.urlopen(req)
-		sentiment = json.loads(response.read())
-		sentiment = round(sentiment['probability']['pos'] * 100)
+		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
+		sentiment = round(blob.sentiment[1] * 100)
 
 		if sentiment <= 10:
 			message = "Wow.. forever alone"
