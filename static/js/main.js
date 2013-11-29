@@ -97,7 +97,7 @@ $(document).ready(function(){
   function activateFriendSelector(accessToken){
     $findFriendImg.fSelector({
       onSubmit: function(selectedFriendIds){
-       if(selectedFriendIds.length > 0){
+        if(selectedFriendIds.length > 0){
           // get name of romantic interest and create dict romInterest w/ id & name
           FB.api('/'+selectedFriendIds[0], function(response){
             romInterest = {'id': selectedFriendIds[0], 'name': response.name};
@@ -108,19 +108,39 @@ $(document).ready(function(){
               type: "POST", 
               url: "/sentiment/",
               data: data,
-              success: function(data){
-                console.log(data)
+              success: function(response){
+                response = $.parseJSON
+
+                if(response.error){
+                  $message.html(response.error)      
+                } else {
+                  // remove handler on find-friend
+                  $findFriendImg.off();
+
+                  // hide choose-friend img to show & show pct
+                  $findFriendImg.animate({opacity: 0});
+                  $findFriendImg.css({
+                    visibility: 'hidden',
+                    cursor: 'default'
+                  });
+                  $("#percentage").removeClass('black');
+
+                  var $sentiment = $('#sentiment');
+                  var currentVal = $sentiment.text();
+                  var endVal = response.sentiment;
+                  var updatePercentage = setInterval(function(){
+                    if(currentVal == endVal){
+                      clearInterval(updatePercentage);
+                      enableShareButton();
+                      $message.html(response.message);
+                    } else{
+                        currentVal++;
+                        $sentiment.text(currentVal);
+                    }
+                  }, 100);
+                }
               }
             });
-
-            /*query = encodeURIComponent('SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterest.id);
-            FB.api('/fql?q='+query, function(response){
-              if (!response || response.error){
-                $message.html("Sorry, Facebook says you've maxed out on your tries!  Please try again in 5 minutes.")
-              } else{
-                handleConversations(response.data);
-              }
-            })*/
           });
 
         } else{
@@ -139,7 +159,34 @@ $(document).ready(function(){
     });
   }
 
-function handleConversations(msgs){
+function enableShareButton(){
+  $('#share').removeClass('black');
+
+  var imgUrl = 'http://' + window.location.hostname + '/static/img/logo.png'
+
+  $shareImg.click(function(e){ 
+    FB.ui({
+      method: 'feed',
+      link: 'http://issheintome.herokuapp.com/',
+      name: response.name + ' has a ' + endVal + '% romantic interest in me!',
+      caption: response.message,
+      picture: imgUrl,
+      description: 'Ever wondered how your romantic interest feels about you?  Is She Into Me runs sentiment analysis on your conversations with a friend to give you an interest score.'
+    }, function(response){
+      if (response && response.post_id) {
+        $shareImg.animate({opacity: 0});
+        $shareImg.css({
+          visibility: 'hidden',
+          cursor: 'default'
+        });
+        $("#share").removeClass('black');
+        $shareImg.off();
+      }
+    });
+  });
+}
+
+/*function handleConversations(msgs){
   if(msgs.length==0){
 
     $message.html(romInterest.name + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else.");
@@ -209,15 +256,7 @@ function handleConversations(msgs){
       }
     });
   }
-}
+}*/
 
-function concatenateMessages(convos){
-  text = '';
-  for (var i = 0; i < convos.length; i++){
-    text += convos[i].body + ' ';
-  }
-  return text;
-}
-      
 
 });

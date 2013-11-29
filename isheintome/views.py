@@ -22,8 +22,12 @@ def sentiment(request):
 		url = 'https://graph.facebook.com/fql?' + data
 		req = urllib2.Request(url)
 		response = json.loads(urllib2.urlopen(req).read())
-		msgs = response['data']
 
+		if (!response || response.error):
+			error = "Sorry, Facebook says you've maxed out on your tries!  Try again in a few minutes."
+			return HttpResponse(json.dumps({'error' : error}))
+		
+		msgs = response['data']
 		# if no messages from user
 		if len(msgs)==0:
 			error = request.POST['romInterest[name]'] + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else."
@@ -31,6 +35,7 @@ def sentiment(request):
 
 		# assign a sentiment to msgs
 		text = concatenateMsgs(msgs)
+		print(text)
 		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
 		sentiment = round(blob.sentiment[1] * 100)
 
@@ -59,38 +64,3 @@ def sentiment(request):
 		
 		# return json encoded sentiment value and name of romantic interest
 		return HttpResponse(json.dumps({'sentiment' : sentiment, 'name' : request.POST['romInterest[name]'], 'message' : message}))
-
-"""def sentiment(request):
-	if request.method=='POST':
-		text = request.POST['text'].encode('ascii', 'ignore');
-		print(text)
-		values = {'text' : text}
-		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
-		print(blob.sentiment)
-		sentiment = round(blob.sentiment[1] * 100)
-
-		if sentiment <= 10:
-			message = "Wow.. forever alone"
-		elif 10 < sentiment <= 20:
-			message = "Basically, you're hated"
-		elif 20 < sentiment <= 30:
-			message = "Friend-zoned"
-		elif 30 < sentiment <= 40:
-			message = "Uhh good luck?"
-		elif 40 < sentiment < 50:
-			message = "So close, but so far."
-		elif sentiment == 50:
-			message = "Love-hate relationship?"
-		elif 50 < sentiment < 60:
-			message = "You've got a chance!"
-		elif 60 < sentiment < 70:
-			message = "Make a move already!"
-		elif 70 < sentiment < 80:
-			message = "If you're not dating, you should be."
-		elif 80 < sentiment < 90:
-			message = "I bet you're only doing this to make your friends jealous."
-		elif 90 < sentiment:
-			message = "Wtf just go get a room already"
-		
-		# return json encoded sentiment value and name of romantic interest
-		return HttpResponse(json.dumps({'sentiment' : sentiment, 'name' : request.POST['name'], 'message' : message}))"""
