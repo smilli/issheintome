@@ -35,13 +35,13 @@ def sentiment(request):
 			message = "So close, but so far."
 		elif sentiment == 50:
 			message = "Love-hate relationship?"
-		elif 50 < sentiment < 60:
+		elif 50 < sentiment <= 60:
 			message = "You've got a chance!"
-		elif 60 < sentiment < 70:
+		elif 60 < sentiment <= 70:
 			message = "Make a move already!"
-		elif 70 < sentiment < 80:
+		elif 70 < sentiment <= 80:
 			message = "If you're not dating, you should be."
-		elif 80 < sentiment < 90:
+		elif 80 < sentiment <= 90:
 			message = "I bet you're only doing this to make your friends jealous."
 		elif 90 < sentiment:
 			message = "Wtf just go get a room already"
