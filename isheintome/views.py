@@ -13,6 +13,7 @@ def index(request):
 
 def sentiment(request):
 	if request.method=='POST':
+		# get messages from fb api
 		access_token = request.POST['accessToken']
 		romInterestId = request.POST['romInterest[id]']
 		query = 'SELECT body FROM message WHERE thread_id IN (SELECT thread_id FROM thread WHERE folder_id=0) AND author_id=' + romInterestId
@@ -22,12 +23,17 @@ def sentiment(request):
 		req = urllib2.Request(url)
 		response = json.loads(urllib2.urlopen(req).read())
 		msgs = response['data']
+
+		# if no messages from user
 		if len(msgs)==0:
 			error = request.POST['romInterest[name]'] + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else."
 			return HttpResponse(json.dumps({'error' : error}))
+
+		# assign a sentiment to msgs
 		text = concatenateMsgs(msgs)
 		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
 		sentiment = round(blob.sentiment[1] * 100)
+
 		if sentiment <= 10:
 			message = "Wow.. forever alone"
 		elif 10 < sentiment <= 20:

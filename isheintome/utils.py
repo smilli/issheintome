@@ -1,5 +1,5 @@
 def concatenateMsgs(msgs):
 	text = ''
 	for msg in msgs:
-		text += msg.body + ' '
+		text += msg['body'] + ' '
 	return text
