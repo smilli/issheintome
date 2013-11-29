@@ -21,7 +21,7 @@ def sentiment(request):
 		url = 'https://graph.facebook.com/fql?' + data
 		req = urllib2.Request(url)
 		response = json.loads(urllib2.urlopen(req).read())
-		msgs = response.data
+		msgs = response['data']
 		if len(msgs)==0:
 			error = request.POST['romInterest[name]'] + " hasn't talked to you in forever!  Maybe you should do something about that.  Try picking someone else."
 			return HttpResponse(json.dumps({'error' : error}))
