@@ -6,7 +6,6 @@ import json
 import urllib
 import urllib2
 from textblob import TextBlob
-from textblob.sentiments import NaiveBayesAnalyzer
 
 def index(request):
 	return render_to_response('index.html', context_instance=RequestContext(request))
@@ -37,8 +36,10 @@ def sentiment(request):
 		# assign a sentiment to msgs
 		text = concatenateMsgs(msgs)
 		print(text)
-		blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
-		sentiment = round(blob.sentiment[1] * 100)
+		blob = TextBlob(text)
+		# turn polarity into sentiment pct
+		sentiment = (blob.sentiment[0] + 1)/2
+		sentiment = round(sentiment * 100)
 		print(sentiment)
 
 		if sentiment <= 10:
