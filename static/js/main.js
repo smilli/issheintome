@@ -164,7 +164,7 @@ function concatenateMessages(convos){
 }
 
   window.fbAsyncInit = function() {
-    FB.init({ appId: '618524414871055', 
+    FB.init({ appId: '1400427420196243', 
           status: true, 
           cookie: true,
           xfbml: true,
